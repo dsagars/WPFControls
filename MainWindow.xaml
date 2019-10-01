@@ -1,0 +1,60 @@
+﻿<Window x:Class="Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Test" 
+        mc:Ignorable="d"
+        Title="Company" Height="500" Width="700" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+            <GradientStop Color="DarkGray" Offset="0"/>
+            <GradientStop Color="WhiteSmoke" Offset="2"/>
+        </LinearGradientBrush>
+
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,10,0,0" Width ="50" Height ="20" Grid.Column="2" />
+        <TextBlock Text="IsMainCompany" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="136,11,0,0" Width="90" Height="20" Grid.Column="2"/>
+        <Button x:Name="Company1" Content="Company1" CommandParameter="{Binding ElementName=Company1,Path=IsEnabled}"  Click="CompanyName_Click" Grid.ColumnSpan="3" Margin="3,34,609,405" Height="30" Width="80" RenderTransformOrigin="-3.415,-5.037"/>
+        <Button x:Name="Company2"  Click="CompanyName_Click2" Grid.ColumnSpan="3" Margin="4,74,608,365" Height="30" Width="80" RenderTransformOrigin="-3.415,-5.037"/>
+        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="100" Margin="-132,186,0,0" VerticalAlignment="Top" Width="470" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.015"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="93" Margin="-3,-15,0,0" VerticalAlignment="Top" Width="693"/>
+        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="100" Margin="-1,183,0,0" VerticalAlignment="Top" Width="470" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.015"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="100" Margin="124,188,0,0" VerticalAlignment="Top" Width="470" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.015"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+    </Grid>
+
+</Window>
+       
