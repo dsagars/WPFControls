@@ -8,25 +8,23 @@ namespace Test
     {
 
         public bool isMainCompany;
-
-
-        public virtual string Name { get; set; }
+        public virtual string Name { get; set; }      
         public virtual List<Car> Cars { get; set; }
-
-
         public virtual bool IsMainCompany { get; set; }
         public List<Address> CompanyAddress { get; set; }
+
+        public Company()
+        {
+            Cars = this.Cars; 
+        }
 
         public virtual string CompanyDetail()
         {
             return $"CompanyName  : {Name}\n" +
                    $"IsMainCompany: {IsMainCompany}";
         }
-        public List<Car> AddCars(List<Car> carsToAdd)
-        {
-            Cars.AddRange(carsToAdd);
-            return Cars;
-
-        }
+        
+        
+       
     }
 }

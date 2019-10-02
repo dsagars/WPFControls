@@ -6,55 +6,28 @@
         xmlns:local="clr-namespace:Test" 
         mc:Ignorable="d"
         Title="Company" Height="500" Width="700" HorizontalAlignment="Left" VerticalAlignment="Top">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-            <GradientStop Color="DarkGray" Offset="0"/>
-            <GradientStop Color="WhiteSmoke" Offset="2"/>
-        </LinearGradientBrush>
-
-    </Window.Background>
-    <Grid>
+    <Border Padding="2" Background="White" BorderThickness="5">
+    <Grid x:Name="MainGrid" Background="Black">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,10,0,0" Width ="50" Height ="20" Grid.Column="2" />
-        <TextBlock Text="IsMainCompany" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="136,11,0,0" Width="90" Height="20" Grid.Column="2"/>
-        <Button x:Name="Company1" Content="Company1" CommandParameter="{Binding ElementName=Company1,Path=IsEnabled}"  Click="CompanyName_Click" Grid.ColumnSpan="3" Margin="3,34,609,405" Height="30" Width="80" RenderTransformOrigin="-3.415,-5.037"/>
-        <Button x:Name="Company2"  Click="CompanyName_Click2" Grid.ColumnSpan="3" Margin="4,74,608,365" Height="30" Width="80" RenderTransformOrigin="-3.415,-5.037"/>
-        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="100" Margin="-132,186,0,0" VerticalAlignment="Top" Width="470" RenderTransformOrigin="0.5,0.5">
-            <Separator.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90.015"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Separator.RenderTransform>
-        </Separator>
-        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="93" Margin="-3,-15,0,0" VerticalAlignment="Top" Width="693"/>
-        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="100" Margin="-1,183,0,0" VerticalAlignment="Top" Width="470" RenderTransformOrigin="0.5,0.5">
-            <Separator.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90.015"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Separator.RenderTransform>
-        </Separator>
-        <Separator Grid.ColumnSpan="3" Background="Black" HorizontalAlignment="Left" Height="100" Margin="124,188,0,0" VerticalAlignment="Top" Width="470" RenderTransformOrigin="0.5,0.5">
-            <Separator.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90.015"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Separator.RenderTransform>
-        </Separator>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="CompanyNameTextBox" Grid.Row="0" Background="#FF919AB0"  Grid.Column="0" Text="Company Name" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
+        <TextBlock x:Name="MainCompanyTextBox" Grid.Row="0" Background="#FF919AB0" Grid.Column="1" Text="Main Company?" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
+        <TextBlock x:Name="CompanyLogoTextBox" Grid.Row="0" Background="#FF919AB0" Grid.Column="2" Text="Company Logo" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
+        <Button x:Name="btn1" Grid.Column="0" Grid.Row="1" Background="White" FontSize="20" Height="40" Width="140">FirstCompany</Button>
+        <Button x:Name="btn2" Grid.Column="0" Grid.Row="2" Background="White" FontSize="20" Height="40" Width="140">SecondCompany</Button>
+        <Button x:Name="btn3" Grid.Column="0" Grid.Row="3" Background="White" FontSize="20" Height="40" Width="140">ThirdCompany</Button>
+        <Button x:Name="btn4" Grid.Column="0" Grid.Row="4" Background="White" FontSize="20" Height="40" Width="140">FourthCompany</Button>
     </Grid>
-
+    </Border>
 </Window>
        
