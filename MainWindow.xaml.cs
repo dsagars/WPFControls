@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Test;
 namespace Test
 {
     /// <summary>
@@ -20,78 +20,84 @@ namespace Test
     /// </summary>
     public partial class MainWindow : Window
     {
-        protected List<Car> Cars { get; set; }
-        protected List<Company> Companies { get; set; }
+        public List<Car> Cars;
+
+        public List<Address> Addresses;
+        public List<Company> Companies;
+
+
+        /* public void allCarData(List<Car> carList)
+         {
+             carList = new List<Car>()
+             {
+                  new Car() { Brand = "Audi", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
+                  new Car() { Brand = "BMW", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
+                  new Car() { Brand = "Opel", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
+                  new Car() { Brand = "Mercedes", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16)}
+             };
+         }
+         public void allAddressData(List<Address> addresses)
+         {
+             addresses = new List<Address>();
+             var address1 = new Address() { Street = "Frankenstr", HouseNumber = 12, PostalCode = 20097, City = "Hamburg" };
+             var address2 = new Address() { Street = "Hauptstr.", HouseNumber = 4, PostalCode = 20095, City = "Hamburg" };
+
+
+         }
+         public void allCompanyData(List<Company> companies)
+         {
+             companies = new List<Company>()
+             {
+                 new Company(){ Name = "Hsoft", IsMainCompany = true, CompanyAddress = new List<Address>(){ }, Cars = new List<Car>(){}},
+                 new Company(){Name = "CFM", IsMainCompany = false, CompanyAddress = new List<Address>(){}, Cars = new List<Car>(){}}
+
+             };
+         }*/
+
         public MainWindow()
         {
-            Cars = new List<Car> {car1, car2} ;
-            DataContext = Cars;
-            Company company1 = new Company() { Name = "Hanseaticsoft", Cars = new List<Car>(), IsMainCompany = true, CompanyAddress = new List<Address>() };
-            Companies = new List<Company> {company1};  
+            Cars = new List<Car>()
+            {
+                 new Car() { Brand = "Audi", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
+                 new Car() { Brand = "BMW", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
+                 new Car() { Brand = "Opel", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
+                 new Car() { Brand = "Mercedes", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16)}
+            };
 
-            DataContext = Companies;
+            Addresses = new List<Address>()
+            {
+             new Address(){Street = "Frankenstr", HouseNumber = 12, PostalCode = 20097, City = "Hamburg"},
+             new Address(){ Street = "Hauptstr.", HouseNumber = 4, PostalCode = 20095, City = "Hamburg" }
+            };
+            Companies = new List<Company>()
+            {
+                 new Company(){ Name = "Hsoft", IsMainCompany = true, CompanyAddress = Addresses, Cars = Cars},
+                 new Company(){Name = "CFM", IsMainCompany = false, CompanyAddress = new List<Address>(){}, Cars = new List<Car>(){}}
+            };
+
+           
             InitializeComponent();
+
         }
-         
 
-         Car car1 = new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
-         Car car2 = new Car() { Brand = "BMW", Model = "coupe", Color = "Blue", Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
-         Car car3 = new Car() { Brand = "Opel", Model = "Astra", Color = "Black", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
-         Car car4 = new Car() { Brand = "Mercedes", Model = "Benz", Color = "Black", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
 
-      
-        private void Button1_Click(object sender, RoutedEventArgs e)
+        private void Btn1_Click(object sender, RoutedEventArgs e)
         {
-            
-            /* List<Car> cars = new List<Car>() {car1,car2,car3 };
-            foreach (Car car in cars)
+            foreach(Company company in Companies)
             {
-                MessageBox.Show(car.GetCarDetails());
-            }*/
-            MessageBox.Show(Companies[0].CompanyDetail());
-            if(Companies[0].IsMainCompany == true)
-            {
-                MessageBox.Show(Companies[0].Name);
+               
+                if(company.IsMainCompany == true)
+                {
+                    MessageBox.Show(company.Name);
+                    foreach (Car car in Companies[0].Cars)
+                    {
+                        MessageBox.Show(car.GetCarDetails());
+                    }
+                }
             }
+              
+          
         }
-
-        private void Button2_Click(object sender, RoutedEventArgs e)
-        {
-              List<Car> cars = new List<Car>() { car2, car3 };
-              foreach(Car car in cars)
-            {
-                MessageBox.Show(car.GetCarDetails());
-            }
-        }
-
-        private void Button3_Click(object sender, RoutedEventArgs e)
-        {
-            List<Car> cars = new List<Car>() { car1, car3 };
-            foreach (Car car in cars)
-            {
-                MessageBox.Show(car.GetCarDetails());
-            }
-
-        }
-
-        private void Button4_Click(object sender, RoutedEventArgs e)
-        {
-            List<Car> cars = new List<Car>() { car1, car2 };
-            foreach (Car car in cars)
-            {
-                MessageBox.Show(car.GetCarDetails());
-            }
-        }
-
-        private void Button5_Click(object sender, RoutedEventArgs e)
-        {
-            List<Car> cars = new List<Car>() {car2, car3,car4 };
-            foreach (Car car in cars)
-            {
-                MessageBox.Show(car.GetCarDetails());
-            }
-        }
-
-       
     }
-}
+    }
+

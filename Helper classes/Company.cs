@@ -13,10 +13,7 @@ namespace Test
         public virtual bool IsMainCompany { get; set; }
         public List<Address> CompanyAddress { get; set; }
 
-        public Company()
-        {
-            Cars = this.Cars; 
-        }
+        
 
         public virtual string CompanyDetail()
         {
