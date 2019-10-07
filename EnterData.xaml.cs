@@ -19,30 +19,37 @@ namespace Test
     
     public partial class EnterData : Window
     {
-       
-       
+        XmlSerializer xs;
+        List<Company> Companies;
         public EnterData()
         {
-         
-
-         InitializeComponent();
+            InitializeComponent();
+            Companies = new List<Company>();
+            
+            xs = new XmlSerializer(typeof(List<Company>));
+            
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Company company = new Company();
-                company.Name = textbox1.Text;
-                company.IsMainCompany = true;
-                SaveXML.savedata(filename);
-                
-            }
-            catch
-            {
+            FileStream fs = new FileStream("F:\\CompanyDetail.xml", FileMode.Create, FileAccess.Write);
+            
+            Company company = new Company();
 
-            }
+            textbox1.Text = company.Name;
+            textbox2.Text = Convert.ToString(company.IsMainCompany);
+            Companies.Add(company);
+            xs.Serialize(fs, Companies);
+            fs.Close();
 
+        }
+
+        private void Read_Click(object sender, RoutedEventArgs e)
+        {
+            FileStream fs = new FileStream("F:\\CompanyDetail.xml", FileMode.Open, FileAccess.Read);
+            Companies = (List<Company>)xs.Deserialize(fs);
+            datagridView1.ItemsSource = Companies;
+            fs.Close();
         }
     }
 }

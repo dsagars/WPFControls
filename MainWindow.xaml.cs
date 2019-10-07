@@ -49,8 +49,8 @@ namespace Test
             };
 
 
+
             
-           
             this.DataContext = Companies;
             
             InitializeComponent();

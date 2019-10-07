@@ -5,16 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="EnterData" Height="300" Width="300">
-    <Grid Height="300" Width="300">
+        Title="EnterData" Height="300" Width="553.036">
+    <Grid Margin="54,0,2,-69">
         <Label Content="Company Detail" Height="30" Width="100" Margin="13,13,187,257" FontWeight="Bold"/>
         <Label x:Name="CompanyName" Content="Companyname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,66,0,0"/>
-        <Label x:Name="Address" Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,105,0,0" RenderTransformOrigin="0.091,1.958"/>
-        <Label x:Name="Cars" Content="Car" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,144,0,0" RenderTransformOrigin="0.144,2.302"/>
+        <Label x:Name="IsMainCompany" Content="IsMainCompany" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,105,0,0" RenderTransformOrigin="0.091,1.958"/>
+        <Label x:Name="CompanyCars" Content="Car" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,144,0,0" RenderTransformOrigin="0.144,2.302"/>
         <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="23" Margin="125,69,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textbox2" HorizontalAlignment="Left" Height="23" Margin="125,111,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textbox3" HorizontalAlignment="Left" Height="23" Margin="125,148,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="169,210,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click"/>
+        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="27,205,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click" RenderTransformOrigin="0.45,0.55"/>
+        <DataGrid x:Name="datagridView1"  Margin="269,0,0,68"/>
+        <Button x:Name="Read" Content="Read" HorizontalAlignment="Left" Margin="170,205,0,0" VerticalAlignment="Top" Width="75" Click="Read_Click" RenderTransformOrigin="1.315,0.55"/>
+
     </Grid>
 
 
