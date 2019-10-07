@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Test;
+using System.IO;
 namespace Test
 {
     /// <summary>
@@ -25,78 +26,75 @@ namespace Test
         public List<Address> Addresses;
         public List<Company> Companies;
 
-
-        /* public void allCarData(List<Car> carList)
-         {
-             carList = new List<Car>()
-             {
-                  new Car() { Brand = "Audi", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
-                  new Car() { Brand = "BMW", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
-                  new Car() { Brand = "Opel", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
-                  new Car() { Brand = "Mercedes", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16)}
-             };
-         }
-         public void allAddressData(List<Address> addresses)
-         {
-             addresses = new List<Address>();
-             var address1 = new Address() { Street = "Frankenstr", HouseNumber = 12, PostalCode = 20097, City = "Hamburg" };
-             var address2 = new Address() { Street = "Hauptstr.", HouseNumber = 4, PostalCode = 20095, City = "Hamburg" };
-
-
-         }
-         public void allCompanyData(List<Company> companies)
-         {
-             companies = new List<Company>()
-             {
-                 new Company(){ Name = "Hsoft", IsMainCompany = true, CompanyAddress = new List<Address>(){ }, Cars = new List<Car>(){}},
-                 new Company(){Name = "CFM", IsMainCompany = false, CompanyAddress = new List<Address>(){}, Cars = new List<Car>(){}}
-
-             };
-         }*/
+       
 
         public MainWindow()
         {
-            Cars = new List<Car>()
-            {
-                 new Car() { Brand = "Audi", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
-                 new Car() { Brand = "BMW", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
-                 new Car() { Brand = "Opel", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16) },
-                 new Car() { Brand = "Mercedes", Color = "Red", Model = "Coupe", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 02, 16)}
-            };
+            Cars = new List<Car>();
+            Car car1 = new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
+            Car car2 = new Car() { Brand = "BMW", Model = "coupe", Color = "Blue", Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
+            Car car3 = new Car() { Brand = "Opel", Model = "Astra", Color = "Black", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
+            Car car4 = new Car() { Brand = "Mercedes", Model = "Benz", Color = "Black", Doors = 4, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
 
-            Addresses = new List<Address>()
-            {
-             new Address(){Street = "Frankenstr", HouseNumber = 12, PostalCode = 20097, City = "Hamburg"},
-             new Address(){ Street = "Hauptstr.", HouseNumber = 4, PostalCode = 20095, City = "Hamburg" }
-            };
+
+            Addresses = new List<Address>();
+            Address addressMainCompany = new Address() { Street = "Frankenstr.", HouseNumber = 12, PostalCode = 22111, City = "Hamburg" };
+            Address addressSubCompany = new Address() { Street = "Mönckebergstr.", HouseNumber = 1, PostalCode = 20095, City = "Hamburg" };
+
+
             Companies = new List<Company>()
             {
-                 new Company(){ Name = "Hsoft", IsMainCompany = true, CompanyAddress = Addresses, Cars = Cars},
-                 new Company(){Name = "CFM", IsMainCompany = false, CompanyAddress = new List<Address>(){}, Cars = new List<Car>(){}}
+                 new Company(){ Name = "Hsoft", IsMainCompany = true, CompanyAddress = new List<Address>(){ addressMainCompany} , Cars = new List<Car>(){car1,car2,car3 } },
+                 new Company(){Name = "CFM", IsMainCompany = false, CompanyAddress = new List<Address>(){addressSubCompany} , Cars = new List<Car>(){car2, car4}}
             };
 
+
+            
            
+            this.DataContext = Companies;
+            
             InitializeComponent();
 
         }
 
-
+        
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Company company in Companies)
+            
+            btn1.DataContext = btn1;
+            btn1.Content = Companies[0].Name;
+            EnterData enterData = new EnterData();
+            enterData.Show();
+            this.Close();
+
+
+            /*if(Companies[0].IsMainCompany == true)
             {
-               
-                if(company.IsMainCompany == true)
+              foreach(Address address in Companies[0].CompanyAddress)
                 {
-                    MessageBox.Show(company.Name);
-                    foreach (Car car in Companies[0].Cars)
-                    {
-                        MessageBox.Show(car.GetCarDetails());
-                    }
+                    MessageBox.Show(address.FullAddress());
                 }
+              foreach(Car car in Companies[0].Cars)
+                {
+                    MessageBox.Show(car.GetCarDetails());
+                }
+            }*/
+
+        }
+
+        private void Btn2_Click(object sender, RoutedEventArgs e)
+        {
+           
+            btn2.DataContext = btn2;
+            btn2.Content = Companies[1].Name;
+            /*foreach (Address address in Companies[1].CompanyAddress)
+            {
+                MessageBox.Show(address.FullAddress());
             }
-              
-          
+            foreach (Car car in Companies[1].Cars)
+            {
+                MessageBox.Show(car.GetCarDetails());
+            }*/
         }
     }
     }

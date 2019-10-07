@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="EnterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,8 +67,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SaveXML.cs" />
     <Compile Include="Data Classes\Address.cs" />
     <Compile Include="Data Classes\ICorporation.cs" />
+    <Compile Include="EnterData.xaml.cs">
+      <DependentUpon>EnterData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper classes\Car.cs" />
     <Compile Include="Data Classes\Vehicle.cs" />
     <Compile Include="Helper classes\Company.cs" />
