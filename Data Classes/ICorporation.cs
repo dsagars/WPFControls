@@ -4,9 +4,9 @@ using System.Text;
 using System.Linq;
 namespace Test
 {
-    interface ICorporation
+    public interface ICorporation
     {
-        string Name { get; set; }
+        string CompanyName { get; set; }
 
         List<Car> Cars { get; set; }
 

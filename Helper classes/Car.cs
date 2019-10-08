@@ -6,21 +6,21 @@ using System.ComponentModel;
 namespace Test
 
 {
-    public class Car : Vehicle
+    public class Car 
     {
-        public override string Brand { get; set; }
+        public  string Brand { get; set; }
 
-        public override string Model { get; set; }
+        public  string Model { get; set; }
 
-        public override string Color { get; set; }
+        public  string Color { get; set; }
 
-        public override int Tires { get; set; }
+        public  int Tires { get; set; }
 
-        public override int? Doors { get; set; }
+        public int? Doors { get; set; }
 
-        public override DateTime ManufactureDate { get; set; }
+        public  DateTime ManufactureDate { get; set; }
 
-        public override string GetCarDetails()
+        public  string GetCarDetails()
         {
             return $"Brand  : {Brand}\n" +
                    $"Model : {Model}\n" +

@@ -6,36 +6,43 @@
         xmlns:local="clr-namespace:Test" 
         mc:Ignorable="d"
         Title="Company" Height="500" Width="700" HorizontalAlignment="Left" VerticalAlignment="Top">
-    <Border Padding="2" Background="White" BorderThickness="5">
-        <Grid x:Name="MainGrid" Background="Black" Margin="-1,0,1,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="CompanyNameTextBox" Grid.Row="0" Background="#FF919AB0"  Grid.Column="0" Text="Company Name" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
-            <TextBlock x:Name="MainCompanyTextBox" Grid.Row="0" Background="#FF919AB0" Grid.Column="1" Text="Main Company" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
-            <TextBlock x:Name="CompanyLogoTextBox" Grid.Row="0" Background="#FF919AB0" Grid.Column="2" Text="Company Form" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
 
-            <Button x:Name="btn1" Content="{Binding XPath=Name,Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Background="White" FontSize="20" Height="40" Width="140" Click="Btn1_Click" />
-            <Button x:Name="btn2" Content="{Binding XPath=Name,Mode=TwoWay}"  Grid.Column="0" Grid.Row="2" Background="White" FontSize="20" Height="40" Width="140" Click="Btn2_Click" />
-            <CheckBox x:Name="checkbox1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" IsChecked="True"/>
-            <CheckBox x:Name="checkbox2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" IsChecked="False"/>
-            <Label Content="GmbH" Background="White" FontSize="20" Grid.Column="2" HorizontalAlignment="Left" Margin="44,27,0,0" Grid.Row="1" VerticalAlignment="Top" Height="42" Width="107"/>
-            <Label Content="GbR" Background =" white" FontSize="20" Grid.Column="2" HorizontalAlignment="Left" Margin="44,22,0,0" Grid.Row="2" VerticalAlignment="Top" Height="37" Width="107" RenderTransformOrigin="0.5,0.5"/>
+    <Grid x:Name="MainGrid" Background="Black" Margin="-1,0,1,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions> 
+        <TextBlock x:Name="CompanyNameTextBox" Grid.Row="0" Background="#FF919AB0"  Grid.Column="0" Text="Company Name" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
+        <TextBlock x:Name="MainCompanyTextBox" Grid.Row="0" Background="#FF919AB0" Grid.Column="1" Text="Main Company" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
+        <TextBlock x:Name="CompanyLogoTextBox" Grid.Row="0" Background="#FF919AB0" Grid.Column="2" Text="Company Form" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="SemiBold"/>
+
+        <Button x:Name="btn1" Content="{Binding XPath=Name,Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Background="White" FontSize="20" Height="40" Width="140" Click="Btn1_Click" />
+        <Button x:Name="btn2" Content="{Binding XPath=Name,Mode=TwoWay}"  Grid.Column="0" Grid.Row="2" Background="White" FontSize="20" Height="40" Width="140" Click="Btn2_Click" />
+        <CheckBox x:Name="checkbox1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" IsChecked="True"/>
+        <CheckBox x:Name="checkbox2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" IsChecked="False"/>
+        <Label Content="GmbH" Background="White" FontSize="20" Grid.Column="2" HorizontalAlignment="Left" Margin="44,27,0,0" Grid.Row="1" VerticalAlignment="Top" Height="42" Width="107"/>
+        <Label Content="GbR" Background =" white" FontSize="20" Grid.Column="2" HorizontalAlignment="Left" Margin="44,22,0,0" Grid.Row="2" VerticalAlignment="Top" Height="37" Width="107" RenderTransformOrigin="0.5,0.5"/>
+
+        <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False" Name="datagrid1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Brands" Binding="{Binding Brand}"/>
+                <DataGridTextColumn  Header="Colors" Binding="{Binding Color}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}"/>
 
 
+            </DataGrid.Columns>
 
 
-
-        </Grid>
-    </Border>
+        </DataGrid>
+    </Grid>
+    
 </Window>
-       
+      

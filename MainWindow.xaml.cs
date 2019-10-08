@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Test;
 using System.IO;
+
 namespace Test
 {
     /// <summary>
@@ -30,7 +30,7 @@ namespace Test
 
         public MainWindow()
         {
-            Cars = new List<Car>();
+            /*Cars = new List<Car>();
             Car car1 = new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
             Car car2 = new Car() { Brand = "BMW", Model = "coupe", Color = "Blue", Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
             Car car3 = new Car() { Brand = "Opel", Model = "Astra", Color = "Black", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) };
@@ -48,54 +48,72 @@ namespace Test
                  new Company(){Name = "CFM", IsMainCompany = false, CompanyAddress = new List<Address>(){addressSubCompany} , Cars = new List<Car>(){car2, car4}}
             };
 
-
-
+           
+            EnterData enterData = new EnterData();*/
             
-            this.DataContext = Companies;
-            
+           
             InitializeComponent();
-
-        }
-
-        
-        private void Btn1_Click(object sender, RoutedEventArgs e)
-        {
             
-            btn1.DataContext = btn1;
-            btn1.Content = Companies[0].Name;
-            EnterData enterData = new EnterData();
-            enterData.Show();
-            this.Close();
-
-
-            /*if(Companies[0].IsMainCompany == true)
+           /* List<Car> Cars = new List<Car>()
             {
-              foreach(Address address in Companies[0].CompanyAddress)
+              new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) },
+              new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) },
+              new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) },
+              new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) },
+
+            };*/
+             datagrid1.DataContext = Cars;
+        }
+      
+        
+
+         private void Btn1_Click(object sender, RoutedEventArgs e)
+         {
+             
+             btn1.DataContext = btn1;
+            // btn1.Content = Companies[0].Name;
+             EnterData enterData = new EnterData();
+             enterData.Show();
+             this.Close();
+
+
+            /* if(Companies[0].IsMainCompany == true)
+             {
+               foreach(Address address in Companies[0].CompanyAddress)
+                 {
+                     MessageBox.Show(address.FullAddress());
+                 }
+               foreach(Car car in Companies[0].Cars)
+                 {
+                     MessageBox.Show(car.GetCarDetails());
+                 }
+             }*/
+
+           }
+
+          private void Btn2_Click(object sender, RoutedEventArgs e)
+            {
+
+                btn2.DataContext = btn2;
+                //btn2.Content = Companies[1].Name;                              
+              /*  foreach (Address address in Companies[1].CompanyAddress)
                 {
                     MessageBox.Show(address.FullAddress());
                 }
-              foreach(Car car in Companies[0].Cars)
+                foreach (Car car in Companies[1].Cars)
                 {
                     MessageBox.Show(car.GetCarDetails());
-                }
-            }*/
-
-        }
-
-        private void Btn2_Click(object sender, RoutedEventArgs e)
-        {
-           
-            btn2.DataContext = btn2;
-            btn2.Content = Companies[1].Name;
-            /*foreach (Address address in Companies[1].CompanyAddress)
-            {
-                MessageBox.Show(address.FullAddress());
+                }*/
             }
-            foreach (Car car in Companies[1].Cars)
-            {
-                MessageBox.Show(car.GetCarDetails());
-            }*/
-        }
-    }
-    }
+        /* private void Window_loaded(object sender, RoutedEventArgs e)
+         {
+            
+            
 
+            datagrid1.ItemsSource = Cars;
+            
+        }*/
+    }
+    }
+   
+    
