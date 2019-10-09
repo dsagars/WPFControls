@@ -47,14 +47,14 @@ namespace Test
                  new Company(){ Name = "Hsoft", IsMainCompany = true, CompanyAddress = new List<Address>(){ addressMainCompany} , Cars = new List<Car>(){car1,car2,car3 } },
                  new Company(){Name = "CFM", IsMainCompany = false, CompanyAddress = new List<Address>(){addressSubCompany} , Cars = new List<Car>(){car2, car4}}
             };
+            */
 
-           
-            EnterData enterData = new EnterData();*/
-            
-           
+
+
+            EnterData enterData = new EnterData();
             InitializeComponent();
             
-           /* List<Car> Cars = new List<Car>()
+          /*List<Car> Cars = new List<Car>()
             {
               new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) },
               new Car() { Brand = "Audi", Model = "A8", Color = "Red", Doors = 2, Tires = 4, ManufactureDate = new DateTime(2016, 08, 12) },
@@ -71,10 +71,10 @@ namespace Test
          {
              
              btn1.DataContext = btn1;
-            // btn1.Content = Companies[0].Name;
-             EnterData enterData = new EnterData();
-             enterData.Show();
-             this.Close();
+            EnterData enterData = new EnterData();
+            enterData.Show();
+            
+             
 
 
             /* if(Companies[0].IsMainCompany == true)

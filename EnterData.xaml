@@ -20,14 +20,38 @@
         <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="20,314,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click" RenderTransformOrigin="0.45,0.55"/>
         <Button x:Name="Read" Content="Read" HorizontalAlignment="Left" Margin="158,313,0,0" VerticalAlignment="Top" Width="75" Click="Read_Click" RenderTransformOrigin="1.315,0.55"/>
         <Label x:Name="Cars" Content="Cars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,187,0,0" RenderTransformOrigin="0.144,2.302"/>
-        <DataGrid ItemsSource="{Binding}" IsReadOnly="True"  x:Name="dataGrid2" AutoGenerateColumns="False" Margin="276,-1,-259,1">
+        <DataGrid ItemsSource="{Binding}" IsReadOnly="True"  x:Name="dataGrid2" AutoGenerateColumns="False" Margin="273,-1,-259,1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding CompanyName}"/>
                 <DataGridTextColumn Header="IsMainCompany" Binding="{Binding IsMainCompany}"/>
+                <!--
+                <DataGridTemplateColumn Header="Cars">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox Name="carsCombo" ItemsSource="{Binding Cars}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBoxItem Content="{Binding Brand}"/>
+                                </StackPanel>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate> 
+                </DataGridTemplateColumn>
+-->
+                <DataGridTemplateColumn Header="Cars">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox Name="ComboCars" IsEnabled="True">
+                                <ListViewItem Content="{Binding Brand}" IsSelected="True"/>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
                 <DataGridTextColumn Header="Address" Binding ="{Binding CompanyAddress}"/>
-                <DataGridTextColumn Header="Cars" Binding="{Binding Cars}"/>
+                
             </DataGrid.Columns>
-            <DataGrid RowDetailsTemplate="{Binding Path=Name}"/>
+           
+            
         </DataGrid>
     </Grid>
 </Window>

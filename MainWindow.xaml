@@ -36,9 +36,8 @@
                 <DataGridTextColumn Header="Brands" Binding="{Binding Brand}"/>
                 <DataGridTextColumn  Header="Colors" Binding="{Binding Color}"/>
                 <DataGridTextColumn Header="Model" Binding="{Binding Model}"/>
-
-
             </DataGrid.Columns>
+            
 
 
         </DataGrid>
