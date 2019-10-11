@@ -18,5 +18,14 @@ namespace Test
 
 
         }
+        public string DemoAddress
+        {
+            get
+            {
+                return $"{Street} {HouseNumber} \n" +
+                       $"{PostalCode} {City}";
+            }
+
+        }
     }
 }

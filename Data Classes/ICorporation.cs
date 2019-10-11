@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.IO;
 namespace Test
 {
-    public interface ICorporation
+    public interface ICorporation 
     {
         string CompanyName { get; set; }
 

@@ -29,8 +29,20 @@ namespace Test
                    $"Doors : {Doors}\n" +
                    $"MFD : {ManufactureDate}\n";
         }
-       
-       
+        public string DemoCar
+        {
+            get
+            {
+                return $"{Brand} ";
+                       
+            }
+            set
+            {
+                DemoCar = value; 
+            }
+
+        }
+
 
     }
 

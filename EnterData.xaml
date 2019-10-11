@@ -6,21 +6,21 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="EnterData" Height="382.988" Width="553.036">
-    <Grid Margin="14,0,258,2">
-        <Label Content="Car Detail" Height="30" Width="100" Margin="10,10,409,316" FontWeight="Bold"/>
+    <Grid Margin="5,7,258,2" x:Name="grid2">
         <Label x:Name="Name" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,66,0,0"/>
         <Label x:Name="IsMainCompany" Content="IsMainCompany" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,105,0,0" RenderTransformOrigin="0.091,1.958"/>
         <Label x:Name="Address" Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,148,0,0" RenderTransformOrigin="0.144,2.302"/>
         <TextBox x:Name="textbox1" Text="{Binding Path= CompanyName}" HorizontalAlignment="Left" Height="23" Margin="125,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textbox2" Text="{Binding Path=IsMainCompany}" HorizontalAlignment="Left" Height="23" Margin="125,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textbox3" Text="{Binding Path=CompanyAddress}" HorizontalAlignment="Left" Height="23" Margin="125,148,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textbox4" Text="{Binding Path=Cars}" HorizontalAlignment="Left" Height="23" Margin="125,148,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textbox5" HorizontalAlignment="Left" Height="23" Margin="125,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textbox6" HorizontalAlignment="Left" Height="23" Margin="125,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="addressButton" Content="{Binding Path=CompanyAddress}" HorizontalAlignment="Left" Height="23" Margin="125,148,0,0"  VerticalAlignment="Top" Width="120">
+
+        </Button>
+        <Label Content="{Binding Companies}" Name="lblstatus" Margin="32,0,186,91" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="64" Height="14"/>
+        <TextBox x:Name="textbox4" HorizontalAlignment="Left" Height="23" Margin="125,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="20,314,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click" RenderTransformOrigin="0.45,0.55"/>
         <Button x:Name="Read" Content="Read" HorizontalAlignment="Left" Margin="158,313,0,0" VerticalAlignment="Top" Width="75" Click="Read_Click" RenderTransformOrigin="1.315,0.55"/>
         <Label x:Name="Cars" Content="Cars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,187,0,0" RenderTransformOrigin="0.144,2.302"/>
-        <DataGrid ItemsSource="{Binding}" IsReadOnly="True"  x:Name="dataGrid2" AutoGenerateColumns="False" Margin="273,-1,-259,1">
+        <DataGrid ItemsSource="{Binding}" IsReadOnly="True"  x:Name="dataGrid2" AutoGenerateColumns="False" Margin="283,-7,-261,-3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding CompanyName}"/>
                 <DataGridTextColumn Header="IsMainCompany" Binding="{Binding IsMainCompany}"/>
@@ -40,18 +40,22 @@
                 <DataGridTemplateColumn Header="Cars">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox Name="ComboCars" IsEnabled="True">
-                                <ListViewItem Content="{Binding Brand}" IsSelected="True"/>
+                            <ComboBox Name="ComboCars" IsEnabled="True" ItemsSource="{Binding Cars}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="carBrand" Text="{Binding DemoCar}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <DataGridTextColumn Header="Address" Binding ="{Binding CompanyAddress}"/>
-                
+
             </DataGrid.Columns>
-           
-            
+
+
         </DataGrid>
     </Grid>
 </Window>

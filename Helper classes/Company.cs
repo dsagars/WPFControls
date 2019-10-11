@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+
 namespace Test
 {
-    public class Company : ICorporation, INotifyPropertyChanged
+    public class Company : ICorporation
     {
         public string companyName;
         public List<Car> cars;
@@ -40,8 +42,7 @@ namespace Test
             }
         }
         public List<Address> CompanyAddress { get; set; }
-     
-
+       
         public virtual string CompanyDetail()
         {
             return $"CompanyName  : {CompanyName}\n" +
