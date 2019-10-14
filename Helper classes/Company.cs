@@ -4,60 +4,97 @@ using System.Text;
 using System.Linq;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 namespace Test
 {
-    public class Company : ICorporation
+    public class Company : ICorporation, INotifyPropertyChanged
     {
         public string companyName;
-        public List<Car> cars;
-        public List<Address> companyAddress;
+        public ObservableCollection<Car> cars;
         public bool isMainCompany;
- 
+        public ObservableCollection<Address> companyAddress;
+
+        
         public virtual string CompanyName
         {
-            get { return companyName; }
+            get
+            {
+                return companyName;
+            }
             set
             {
-                if(this.companyName != value)
+                if(value == companyName)
                 {
-                    this.companyName = value;
-                    this.NotifyPropertyChanged("CompanyName");
+                    return;
                 }
+                companyName = value;
+                OnPropertyChanged();
+                
             }
+
         }
-         
-        public virtual List<Car> Cars { get; set; }
-       
+        
+        public virtual ObservableCollection<Car> Cars
+        {
+            get
+            {
+                return cars;
+            }
+            set
+            {
+                if(value == cars)
+                {
+                    return;
+                }
+                cars = value;
+                OnPropertyChanged();
+            }
+        }        
         public virtual bool IsMainCompany
         {
-            get { return this.isMainCompany; }
+            get
+            {
+                return isMainCompany;
+            }
             set
             {
-                if(this.isMainCompany != value)
+                if(value == isMainCompany)
                 {
-                    this.isMainCompany = value;
-                    this.NotifyPropertyChanged("IsMainCompany");
+                    return;
                 }
+                isMainCompany = value;
+                OnPropertyChanged();
             }
         }
-        public List<Address> CompanyAddress { get; set; }
-       
+        
+        public ObservableCollection<Address> CompanyAddress
+        {
+            get
+            {
+                return companyAddress;
+            }
+            set
+            {
+                if(value == companyAddress)
+                {
+                    return;
+                }
+                companyAddress = value;
+                OnPropertyChanged();
+            }
+        }
         public virtual string CompanyDetail()
         {
             return $"CompanyName  : {CompanyName}\n" +
                    $"IsMainCompany: {IsMainCompany}";
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged( string propName)
+        protected virtual void OnPropertyChanged([CallerMemberName]string propetyName = null)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-               
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("propertyName"));
         }
+
+
     }
 }

@@ -15,12 +15,15 @@ using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.IO;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Test
 {
-    public partial class MainWindow : Window 
+    public partial class MainWindow : Window,  INotifyCollectionChanged
     {  
-        public ObservableCollection<Company> Companies;
+        public ObservableCollection<Company> Companies { get; set;}
+        
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -33,20 +36,29 @@ namespace Test
 
             Companies = new ObservableCollection<Company>()
             {
-                 new Company(){CompanyName = "Hsoft", IsMainCompany = true, Cars = new List<Car>{car1,car2}, CompanyAddress = new List<Address>{addressMainCompany,addressSubCompany}},
-                 new Company(){CompanyName = "CFM", IsMainCompany = false , Cars = new List<Car>{car1,car3}, CompanyAddress = new List<Address>{addressSubCompany}},
-                 new Company(){CompanyName = "CSM", IsMainCompany = false , Cars = new List<Car>{car2,car3}, CompanyAddress = new List<Address>{addressSubCompany}}
-            };   
-            datagrid1.DataContext = Companies;
+                 new Company(){CompanyName = "Hsoft", IsMainCompany = true, Cars = new ObservableCollection<Car>{car1,car2}, CompanyAddress = new ObservableCollection<Address>{addressMainCompany,addressSubCompany}},
+                 new Company(){CompanyName = "CFM", IsMainCompany = false , Cars = new ObservableCollection<Car>{car1,car3}, CompanyAddress = new ObservableCollection<Address>{addressSubCompany}},
+                 new Company(){CompanyName = "CSM", IsMainCompany = false , Cars = new ObservableCollection<Car>{car2,car3}, CompanyAddress = new ObservableCollection<Address>{addressSubCompany}}
+            };
+
+           
+           ;
             
+
+            datagrid1.DataContext = Companies;
+           
         }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            EnterData enterData = new EnterData();
+           
+            EnterData enterData = new EnterData();      
             enterData.Show();
         }
 
-        
+       
+
     }
 }

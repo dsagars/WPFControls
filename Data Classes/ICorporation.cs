@@ -10,9 +10,9 @@ namespace Test
     {
         string CompanyName { get; set; }
 
-        List<Car> Cars { get; set; }
+        ObservableCollection<Car> Cars { get; set; }
 
-        List<Address> CompanyAddress { get; set; }
+        ObservableCollection<Address> CompanyAddress { get; set; }
 
 
         bool IsMainCompany { get; set; }
