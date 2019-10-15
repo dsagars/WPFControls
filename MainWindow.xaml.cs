@@ -16,49 +16,130 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace Test
 {
-    public partial class MainWindow : Window,  INotifyCollectionChanged
-    {  
-        public ObservableCollection<Company> Companies { get; set;}
-        
-        
+    public partial class MainWindow : Window, INotifyCollectionChanged, INotifyPropertyChanged
+    {
+        private ObservableCollection<Company> Companies;
+        private ObservableCollection<Car> CarsToAdd;
+        private ObservableCollection<Address> AddressToAdd;
+        private ObservableCollection<Company> ModifiedCompanyList;
         public MainWindow()
         {
             InitializeComponent();
-            Car car1 = new Car() { Brand = "Audi", Color = "aadasda", Doors = 4, Tires = 4, Model = "asdaddcccc", ManufactureDate = new DateTime(2016, 12, 2) };
-            Car car2 = new Car() { Brand = "BMW", Color = "aaeweddasda", Doors = 4, Tires = 4, Model = "aeerweddcccc", ManufactureDate = new DateTime(2016, 12, 2) };
-            Car car3 = new Car() { Brand = "Mercedes", Color = "aaeweddasda", Doors = 4, Tires = 4, Model = "aeerweddcccc", ManufactureDate = new DateTime(2016, 12, 2) };
+            Companies = new ObservableCollection<Company>();
 
-            Address addressMainCompany = new Address() { Street = "Frankenstr.", HouseNumber = 12, PostalCode = 22111, City = "Hamburg" };
-            Address addressSubCompany = new Address() { Street = "Hauptstr.", HouseNumber = 12, PostalCode = 22111, City = "Hamburg" };
+            CarsToAdd = new ObservableCollection<Car>();
+            AddressToAdd = new ObservableCollection<Address>();
+            ModifiedCompanyList = new ObservableCollection<Company>();
+            DataContext = Companies;
+            Companies.CollectionChanged += this.CollectionChanged;
+        }
 
-            Companies = new ObservableCollection<Company>()
+
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            CarsToAdd.Add(new Car
             {
-                 new Company(){CompanyName = "Hsoft", IsMainCompany = true, Cars = new ObservableCollection<Car>{car1,car2}, CompanyAddress = new ObservableCollection<Address>{addressMainCompany,addressSubCompany}},
-                 new Company(){CompanyName = "CFM", IsMainCompany = false , Cars = new ObservableCollection<Car>{car1,car3}, CompanyAddress = new ObservableCollection<Address>{addressSubCompany}},
-                 new Company(){CompanyName = "CSM", IsMainCompany = false , Cars = new ObservableCollection<Car>{car2,car3}, CompanyAddress = new ObservableCollection<Address>{addressSubCompany}}
-            };
+                Brand = txtBrand.Text,
+                Model = txtModel.Text,
+                Color = txtColor.Text,
+                Doors = int.Parse(txtDoors.Text),
+                Tires = int.Parse(txtTires.Text),
+                ManufactureDate = DateTime.Parse(txtMFD.Text)
+            });
 
-           
-           ;
-            
+            AddressToAdd.Add(new Address
+            {
+                Street = txtStreet.Text,
+                HouseNumber = int.Parse(txtHouseNumber.Text),
+                PostalCode = int.Parse(txtPostalCode.Text),
+                City = txtCity.Text
+            });
 
-            datagrid1.DataContext = Companies;
-           
+            Companies.Add(new Company
+            {
+
+                CompanyName = txtCompanyName.Text,
+                IsMainCompany = bool.Parse(txtIsMainCompany.Text),
+                Cars = CarsToAdd,
+                CompanyAddress = AddressToAdd
+
+            });
+
+
+            txtBrand.Text = txtModel.Text
+          = txtColor.Text = txtDoors.Text
+          = txtTires.Text = txtStreet.Text
+          = txtHouseNumber.Text = txtPostalCode.Text
+          = txtPostalCode.Text = txtCity.Text
+          = txtCompanyName.Text = txtIsMainCompany.Text
+          = txtMFD.Text = string.Empty;
+
+        }
+
+
+        private void BtnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            Companies.Remove(listCompany.SelectedItem as Company);
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
+        public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-           
-            EnterData enterData = new EnterData();      
-            enterData.Show();
+            if (e.NewItems != null)
+            {
+                foreach (Company company in e.NewItems)
+                {
+                    ModifiedCompanyList.Add(company);
+                    company.PropertyChanged += this.OnItemPropertyChanged;
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach (Company company in e.OldItems)
+                {
+                    ModifiedCompanyList.Add(company);
+                    company.PropertyChanged -= this.OnItemPropertyChanged;
+                }
+            }
         }
 
-       
+        public void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Company company = sender as Company;
+            if (company != null)
+            {
+                ModifiedCompanyList.Add(company);
+            }
+        }
 
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectCompany.SelectedItem.ToString() != null)
+            {
+                Company company = new Company(); 
+                if(SelectCompany.SelectedItem.ToString() == company.CompanyName)
+                {
+                    txtCompanyName.IsEnabled = false;
+                    txtIsMainCompany.IsEnabled = false;
+                    MessageBox.Show(company.CompanyName);
+                }
+            }
+        }
+        private void ComboBoxSelectionChanged(object sender, EventArgs e)
+        {
+            if (SelectCompany.SelectedItem.ToString() != null)
+            {
+                txtCompanyName.IsEnabled = false;
+            }
+        }
+
+        
     }
 }

@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BindableBase.cs" />
     <Compile Include="Data Classes\Address.cs" />
     <Compile Include="Data Classes\ICorporation.cs" />
     <Compile Include="EnterData.xaml.cs">

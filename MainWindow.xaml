@@ -7,46 +7,106 @@
         mc:Ignorable="d"
         Title="Company" Height="500" Width="700" HorizontalAlignment="Left" VerticalAlignment="Top">
 
-    <Grid Margin="10" Name="companyGrid" ShowGridLines="True">
-        <DataGrid x:Name="datagrid1" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" >
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="CompanyName" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="button1" Content="{Binding CompanyName}" Click="Button1_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridCheckBoxColumn Header="IsMainCompany" Binding="{Binding IsMainCompany}" Width="*"/>
-                <DataGridTemplateColumn Header="Cars" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox x:Name="combobox1" ItemsSource="{Binding Cars}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Brand}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Address" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox x:Name="combobox2" ItemsSource="{Binding CompanyAddress}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding DemoAddress}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-       
+    <Grid  Name="companyGrid" ShowGridLines="True" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <!--<ColumnDefinition Width="*"/>-->
+        </Grid.ColumnDefinitions>
+        <StackPanel >
+            <TextBlock x:Name="companyName" Text="CompanyName:"></TextBlock>
+            <TextBox x:Name="txtCompanyName"></TextBox>
+            <TextBlock x:Name="IsMainCompany" Text="IsMainCompany:"></TextBlock>
+            <TextBox x:Name="txtIsMainCompany"></TextBox>
+
+            <TextBlock x:Name="companyCars" Text="Cars:"></TextBlock>
+            <ComboBox x:Name="txtCars" >
+                <TextBlock x:Name="Brand" Text="Brand :"></TextBlock>
+                <TextBox x:Name="txtBrand" Width="200"></TextBox>
+                <TextBlock x:Name="Model" Text="Model:"></TextBlock>
+                <TextBox x:Name="txtModel" Width="200"></TextBox>
+                <TextBlock x:Name="Color" Text="Color:"></TextBlock>
+                <TextBox x:Name="txtColor" Width="200"></TextBox>
+                <TextBlock x:Name="Tires" Text="Tires :"></TextBlock>
+                <TextBox x:Name="txtTires" Width="200"></TextBox>
+                <TextBlock x:Name="Doors" Text="Doors:"></TextBlock>
+                <TextBox x:Name="txtDoors" Width="200"></TextBox>
+                <TextBlock x:Name="MFD" Text="MFD :"></TextBlock>
+                <TextBox x:Name="txtMFD" Width="200"></TextBox>
+            </ComboBox>
+
+
+
+            <TextBlock x:Name="companyAddress" Text="Address:"></TextBlock>
+            <ComboBox x:Name="txtCompanyAddress">
+                <TextBlock x:Name="Street" Text="Street:"></TextBlock>
+                <TextBox x:Name="txtStreet" Width="200"></TextBox>
+                <TextBlock x:Name="HouseNumber" Text="HouseNumber :"></TextBlock>
+                <TextBox x:Name="txtHouseNumber" Width="200"></TextBox>
+                <TextBlock x:Name="PostalCode" Text="PostalCode :"></TextBlock>
+                <TextBox x:Name="txtPostalCode" Width="200"></TextBox>
+                <TextBlock x:Name="City" Text="City :"></TextBlock>
+                <TextBox x:Name="txtCity" Width="200"></TextBox>
+            </ComboBox>
+            <TextBlock Text="Select Company: " Margin="5"/>
+            <ComboBox Name="SelectCompany"  Height="20" IsEnabled="True" ItemsSource="{Binding}" Margin="10,0,10,10" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <ComboBoxItem Tag="companySelector" Name="comboSelect" IsSelected="False" Content="{Binding CompanyName}"/>
+                    </DataTemplate>   
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button x:Name="btnAdd" Content="Add" Margin="10" Click="BtnAdd_Click"/>
+            <Button x:Name="btnRemove" Content="Remove" Margin="10" Click="BtnRemove_Click"/>
+            <Button x:Name="btnEdit" Content="Edit" Margin="10" Click="BtnEdit_Click"/>
+
+        </StackPanel>
+        <ListView x:Name="listCompany" Grid.Column="1" Margin="2,-3,-1,0" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Company" DisplayMemberBinding="{Binding CompanyName}"/>
+                    <GridViewColumn Header="IsMainCompany" DisplayMemberBinding="{Binding IsMainCompany}"/>
+                    
+                    <GridViewColumn Header="Cars">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Name="Cars" IsEnabled="True" ItemsSource="{Binding Cars}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <ListViewItem  Content="{Binding DemoCar}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn Header="Address">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Name="Address" IsEnabled="True" ItemsSource="{Binding CompanyAddress}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <ListViewItem  Content="{Binding DemoAddress}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
     </Grid>
+
 </Window>
       

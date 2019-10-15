@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace Test
 {
-    public class Company : ICorporation, INotifyPropertyChanged
+    public class Company : BindableBase, ICorporation
     {
         public string companyName;
         public ObservableCollection<Car> cars;
@@ -24,13 +24,8 @@ namespace Test
             }
             set
             {
-                if(value == companyName)
-                {
-                    return;
-                }
                 companyName = value;
-                OnPropertyChanged();
-                
+                NotifyPropertyChanged("CompanyName");
             }
 
         }
@@ -43,12 +38,8 @@ namespace Test
             }
             set
             {
-                if(value == cars)
-                {
-                    return;
-                }
                 cars = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged("Cars");
             }
         }        
         public virtual bool IsMainCompany
@@ -59,12 +50,8 @@ namespace Test
             }
             set
             {
-                if(value == isMainCompany)
-                {
-                    return;
-                }
                 isMainCompany = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged("IsMainCompany");
             }
         }
         
@@ -76,12 +63,8 @@ namespace Test
             }
             set
             {
-                if(value == companyAddress)
-                {
-                    return;
-                }
                 companyAddress = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged("CompanyAddress");
             }
         }
         public virtual string CompanyDetail()
@@ -89,11 +72,7 @@ namespace Test
             return $"CompanyName  : {CompanyName}\n" +
                    $"IsMainCompany: {IsMainCompany}";
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName]string propetyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("propertyName"));
-        }
+       
 
 
     }

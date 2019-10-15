@@ -24,17 +24,29 @@ namespace Test
     public partial class EnterData : Window, INotifyCollectionChanged
     {
         XmlSerializer xs;
-        ObservableCollection<Company> CompanyCollection;
-        ObservableCollection<Address> Addresses;
-        ObservableCollection<Car> CompanyCars;
-        
+        private ObservableCollection<Company> companyCollection = new ObservableCollection<Company>();
+        public ObservableCollection<Company> CompanyCollection
+        {
+            get
+            {
+                return companyCollection;
+            }
+            set
+            {
+                companyCollection = value;
+                
+            }
+        }
+        public Address CompanyAddress { get; set; }
+        List<Car> Cars = new List<Car>();
+ 
         public EnterData()
         {
 
             InitializeComponent();
             xs = new XmlSerializer(typeof(ObservableCollection<Company>));
             CompanyCollection = new ObservableCollection<Company>();
-           
+            
             dataGrid2.DataContext = CompanyCollection;
             
             
@@ -49,6 +61,7 @@ namespace Test
             Company company = new Company();
             company.CompanyName = textbox1.Text;
             company.IsMainCompany = bool.Parse(textbox2.Text);
+          
             CompanyCollection.Add(company);
 
             xs.Serialize(fs, CompanyCollection);
@@ -58,7 +71,6 @@ namespace Test
        
         private void Read_Click(object sender, RoutedEventArgs e)
         {
-
             FileStream fs = new FileStream("C:\\CompanyDetails.xml", FileMode.Open, FileAccess.Read);
             CompanyCollection = (ObservableCollection<Company>)xs.Deserialize(fs);
             dataGrid2.ItemsSource = CompanyCollection;
@@ -67,7 +79,7 @@ namespace Test
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
        
-        
+       
 
     }
 }

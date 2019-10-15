@@ -4,12 +4,48 @@ using System.Text;
 using System.Linq;
 namespace Test
 {
-    public class Address
+    public class Address : BindableBase
     {
-        public string Street { get; set; }
-        public int HouseNumber { get; set; }
-        public int PostalCode { get; set; }
-        public string City { get; set; }
+        private string street;
+        private int houseNumber;
+        private int postalcode;
+        private string city;
+        public string Street
+        {
+            get { return street; }
+            set
+            {
+                street = value;
+                NotifyPropertyChanged("Street");
+            }
+        }
+        public int HouseNumber
+        {
+            get { return houseNumber; }
+            set
+            {
+                houseNumber = value;
+                NotifyPropertyChanged("HouseNumber");
+            }
+        }
+        public int PostalCode
+        {
+            get { return postalcode; }
+            set
+            {
+                postalcode = value;
+                NotifyPropertyChanged("PostalCode");
+            }
+        }
+        public string City
+        {
+            get { return city; }
+            set
+            {
+                city = value;
+                NotifyPropertyChanged("City");
+            }
+        }
 
         public string FullAddress()
         {

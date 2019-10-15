@@ -6,20 +6,74 @@ using System.ComponentModel;
 namespace Test
 
 {
-    public class Car 
+    public class Car : BindableBase
     {
-        public  string Brand { get; set; }
+        private string brand;
+        private string model;
+        private string color;
+        private int tires;
+        private int? doors;
+        private DateTime manufactureDate;
+        
+        public  string Brand
+        {
+            get { return brand; }
+            set
+            {
+                brand = value;
+                NotifyPropertyChanged("Brand");
+            }
+        }
 
-        public  string Model { get; set; }
+        public  string Model
+        {
+            get { return model; }
+            set
+            {
+                model = value;
+                NotifyPropertyChanged("Model");
+            }
+        }
 
-        public  string Color { get; set; }
+        public  string Color
+        {
+            get { return color; }
+            set
+            {
+                color = value;
+                NotifyPropertyChanged("Color");
+            }
+        }
 
-        public  int Tires { get; set; }
+        public  int Tires
+        {
+            get { return tires; }
+            set
+            {
+                tires = value;
+                NotifyPropertyChanged("Tires");
+            }
+        }
 
-        public int? Doors { get; set; }
+        public int? Doors
+        {
+            get { return doors; }
+            set
+            {
+                doors = value;
+                NotifyPropertyChanged("Doors");
+            }
+        }
 
-        public  DateTime ManufactureDate { get; set; }
-
+        public  DateTime ManufactureDate
+        {
+            get { return manufactureDate; }
+            set
+            {
+                manufactureDate = value;
+                NotifyPropertyChanged("ManufactureDate");
+            }
+        }
         public  string GetCarDetails()
         {
             return $"Brand  : {Brand}\n" +
@@ -33,7 +87,13 @@ namespace Test
         {
             get
             {
-                return $"{Brand} ";
+                return 
+                   $"Brand  : {Brand}\n" +
+                   $"Model : {Model}\n" +
+                   $"Color : {Color}\n" +
+                   $"Tires : {Tires}\n" +
+                   $"Doors : {Doors}\n" +
+                   $"MFD : {ManufactureDate}\n";
                        
             }
             set
