@@ -35,41 +35,47 @@ namespace Test
             AddressToAdd = new ObservableCollection<Address>();
             ModifiedCompanyList = new ObservableCollection<Company>();
             DataContext = Companies;
-            Companies.CollectionChanged += this.CollectionChanged;
+            Companies.CollectionChanged += this.OnCollectionChanged;
+            
         }
 
 
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            CarsToAdd.Add(new Car
-            {
-                Brand = txtBrand.Text,
-                Model = txtModel.Text,
-                Color = txtColor.Text,
-                Doors = int.Parse(txtDoors.Text),
-                Tires = int.Parse(txtTires.Text),
-                ManufactureDate = DateTime.Parse(txtMFD.Text)
-            });
+            
+            
+                CarsToAdd.Add(new Car
+                {
+                    Brand = txtBrand.Text,
+                    Model = txtModel.Text,
+                    Color = txtColor.Text,
+                    Doors = int.Parse(txtDoors.Text),
+                    Tires = int.Parse(txtTires.Text),
+                    ManufactureDate = DateTime.Parse(txtMFD.Text)
+                });
 
-            AddressToAdd.Add(new Address
-            {
-                Street = txtStreet.Text,
-                HouseNumber = int.Parse(txtHouseNumber.Text),
-                PostalCode = int.Parse(txtPostalCode.Text),
-                City = txtCity.Text
-            });
+                AddressToAdd.Add(new Address
+                {
+                    Street = txtStreet.Text,
+                    HouseNumber = int.Parse(txtHouseNumber.Text),
+                    PostalCode = int.Parse(txtPostalCode.Text),
+                    City = txtCity.Text
+                });
 
-            Companies.Add(new Company
-            {
+                Companies.Add(new Company
+                {
 
-                CompanyName = txtCompanyName.Text,
-                IsMainCompany = bool.Parse(txtIsMainCompany.Text),
-                Cars = CarsToAdd,
-                CompanyAddress = AddressToAdd
+                    CompanyName = txtCompanyName.Text,
+                    IsMainCompany = bool.Parse(txtIsMainCompany.Text),
+                    Cars = CarsToAdd,
+                    CompanyAddress = AddressToAdd
 
-            });
-
+                });
+             
+            
+            
+            
 
             txtBrand.Text = txtModel.Text
           = txtColor.Text = txtDoors.Text
@@ -80,7 +86,7 @@ namespace Test
           = txtMFD.Text = string.Empty;
 
         }
-
+        
 
         private void BtnRemove_Click(object sender, RoutedEventArgs e)
         {
@@ -121,22 +127,33 @@ namespace Test
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectCompany.SelectedItem.ToString() != null)
+            
+            foreach (var company in Companies)
             {
-                Company company = new Company(); 
-                if(SelectCompany.SelectedItem.ToString() == company.CompanyName)
+                if (SelectCompany.SelectedItem.ToString() == company.CompanyName)
                 {
-                    txtCompanyName.IsEnabled = false;
-                    txtIsMainCompany.IsEnabled = false;
-                    MessageBox.Show(company.CompanyName);
+                    txtCompanyName.IsReadOnly = txtIsMainCompany.IsReadOnly = txtCompanyAddress.IsReadOnly = true;
+                    CarsToAdd.Add(new Car
+                    {
+                        Brand = txtBrand.Text,
+                        Model = txtModel.Text,
+                        Color = txtColor.Text,
+                        Doors = int.Parse(txtDoors.Text),
+                        Tires = int.Parse(txtTires.Text),
+                        ManufactureDate = DateTime.Parse(txtMFD.Text)
+                    });
                 }
+                 
             }
         }
-        private void ComboBoxSelectionChanged(object sender, EventArgs e)
+        
+
+        private void SelectCompany_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SelectCompany.SelectedItem.ToString() != null)
+            Company company = new Company();
+            if (SelectCompany.SelectedIndex > -1 && Companies != null && SelectCompany.SelectedItem.ToString() == company.CompanyName)
             {
-                txtCompanyName.IsEnabled = false;
+                
             }
         }
 

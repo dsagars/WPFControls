@@ -29,6 +29,7 @@ namespace Test
             }
 
         }
+       
         
         public virtual ObservableCollection<Car> Cars
         {
@@ -37,7 +38,8 @@ namespace Test
                 return cars;
             }
             set
-            {
+            {    
+            
                 cars = value;
                 NotifyPropertyChanged("Cars");
             }
@@ -71,9 +73,9 @@ namespace Test
         {
             return $"CompanyName  : {CompanyName}\n" +
                    $"IsMainCompany: {IsMainCompany}";
+                    
         }
+
        
-
-
     }
 }

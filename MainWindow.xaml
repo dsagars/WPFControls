@@ -49,7 +49,7 @@
                 <TextBox x:Name="txtCity" Width="200"></TextBox>
             </ComboBox>
             <TextBlock Text="Select Company: " Margin="5"/>
-            <ComboBox Name="SelectCompany"  Height="20" IsEnabled="True" ItemsSource="{Binding}" Margin="10,0,10,10" >
+            <ComboBox Name="SelectCompany"  Height="20" IsEnabled="True" ItemsSource="{Binding}"  SelectionChanged="SelectCompany_SelectionChanged" Margin="10,0,10,10" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <ComboBoxItem Tag="companySelector" Name="comboSelect" IsSelected="False" Content="{Binding CompanyName}"/>
