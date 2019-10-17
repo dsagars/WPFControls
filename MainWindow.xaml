@@ -14,14 +14,16 @@
             <!--<ColumnDefinition Width="*"/>-->
         </Grid.ColumnDefinitions>
         <StackPanel >
-            <TextBlock x:Name="companyName" Text="CompanyName:"></TextBlock>
+            <Label Content="Company Name:"></Label>
             <TextBox x:Name="txtCompanyName"></TextBox>
-            <TextBlock x:Name="IsMainCompany" Text="IsMainCompany:"></TextBlock>
-            <TextBox x:Name="txtIsMainCompany"></TextBox>
+            <CheckBox x:Name="IsMainCompany" Content="Is Main Company?"></CheckBox>
 
-            <TextBlock x:Name="companyCars" Text="Cars:"></TextBlock>
+            <Label Content="Cars:"></Label>
             <ComboBox x:Name="txtCars" >
-                <TextBlock x:Name="Brand" Text="Brand :"></TextBlock>
+                <ComboBoxItem>
+                    <TextBlock x:Name="Brand" Text="Brand :"></TextBlock>
+                </ComboBoxItem>
+                
                 <TextBox x:Name="txtBrand" Width="200"></TextBox>
                 <TextBlock x:Name="Model" Text="Model:"></TextBlock>
                 <TextBox x:Name="txtModel" Width="200"></TextBox>

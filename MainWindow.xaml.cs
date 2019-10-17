@@ -76,7 +76,7 @@ namespace Test
             myCompany = new Company()
             {
                 CompanyName = txtCompanyName.Text,
-                IsMainCompany = bool.Parse(txtIsMainCompany.Text),
+                IsMainCompany = IsMainCompany.IsChecked.Value,
                 Cars = CarsToAdd,
                 CompanyAddress = AddressToAdd
             };
@@ -89,8 +89,7 @@ namespace Test
           = txtTires.Text = txtStreet.Text
           = txtHouseNumber.Text = txtPostalCode.Text
           = txtPostalCode.Text = txtCity.Text
-          = txtCompanyName.Text = txtIsMainCompany.Text
-          = txtMFD.Text = string.Empty;
+          = txtCompanyName.Text = txtMFD.Text = string.Empty;
 
         }
 
