@@ -5,60 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="EnterData" Height="382.988" Width="553.036">
-    <Grid Margin="5,4,258,2" x:Name="grid2">
-        <Label x:Name="CompanyName" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,66,0,0"/>
-        <Label x:Name="MainCompany" Content="MainCompany" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,105,0,0" RenderTransformOrigin="0.091,1.958"/>
-        <Label x:Name="Address" Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,148,0,0" RenderTransformOrigin="0.144,2.302"/>
-        <TextBox x:Name="textbox1" Text="{Binding Path= CompanyName}" HorizontalAlignment="Left" Height="23" Margin="125,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textbox2" Text="{Binding Path=IsMainCompany}" HorizontalAlignment="Left" Height="23" Margin="125,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="addressButton" Content="{Binding Path=CompanyAddress}" HorizontalAlignment="Left" Height="23" Margin="125,148,0,0"  VerticalAlignment="Top" Width="120">
+        Title="Company Detail" Height="500" Width="800">
 
-        </Button>
-        <Label Content="{Binding Companies}" Name="lblstatus" Margin="32,0,186,91" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="64" Height="14"/>
-        <TextBox x:Name="textbox4" HorizontalAlignment="Left" Height="23" Margin="125,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="20,314,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click" RenderTransformOrigin="0.45,0.55"/>
-        <Button x:Name="Read" Content="Read" HorizontalAlignment="Left" Margin="158,313,0,0" VerticalAlignment="Top" Width="75" Click="Read_Click" RenderTransformOrigin="1.315,0.55"/>
-        <Label x:Name="CarsToAdd" Content="CarstoAdd" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,187,0,0" RenderTransformOrigin="0.144,2.302"/>
-        <DataGrid x:Name="dataGrid2"  ItemsSource="{Binding}" IsReadOnly="True"  AutoGenerateColumns="False" Margin="283,-7,-261,-3">
-            <DataGrid.DataContext>
-                <local:Company/>
-            </DataGrid.DataContext>
+    <Grid Margin="10" Name="gridMain" ShowGridLines="True">
+        <DataGrid x:Name="datagrid1" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding CompanyName}"/>
-                <DataGridTextColumn Header="IsMainCompany" Binding="{Binding IsMainCompany}"/>
-                <!--
-                <DataGridTemplateColumn Header="Cars">
+                <DataGridTemplateColumn Header="CompanyName" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox Name="carsCombo" ItemsSource="{Binding Cars}">
-                                <StackPanel Orientation="Horizontal">
-                                    <ComboBoxItem Content="{Binding Brand}"/>
-                                </StackPanel>
-                            </ComboBox>
+                            <ListViewItem x:Name="companyListDetails" Content="{Binding CompanyName}"/>
                         </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate> 
+                    </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
--->
-                <DataGridTemplateColumn Header="Cars">
+                <DataGridCheckBoxColumn Header="IsMainCompany" Binding="{Binding IsMainCompany}" Width="*"/>
+                <DataGridTemplateColumn Header="Cars" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox Name="ComboCars" IsEnabled="True" ItemsSource="{Binding XPath=Cars ,ElementName=ComboCars}" >
+                            <ComboBox x:Name="combobox1" ItemsSource="{Binding Cars}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock x:Name="carBrand" Text="{Binding DemoCar}"/>
+                                        <TextBlock Text="{Binding Brand}"/>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <DataGridTextColumn Header="Address" Binding ="{Binding CompanyAddress}"/>
-
+                <DataGridTemplateColumn Header="Address" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox x:Name="combobox2" ItemsSource="{Binding CompanyAddress}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DemoAddress}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
 
-
         </DataGrid>
+        <Grid x:Name="addressGrid" Height="155" VerticalAlignment="Top" Margin="10,259,0,0" ShowGridLines="True" DataContext="{Binding CompanyAddress}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Name="Street" Grid.Row="0" Grid.Column="0" Content="Street" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="37" Margin="0,10,0,0" Padding="2"/>
+            <Label x:Name="HouseNumber" Grid.Row="0" Grid.Column="0" Content="HouseNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="84" Margin="0,41,0,0" Padding="2" RenderTransformOrigin="0.503,1.518"/>
+            <Label x:Name="PostalCode" Grid.Row="0" Grid.Column="0" Content="PostalCode" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="69" Margin="0,73,0,0" Padding="2" RenderTransformOrigin="0.503,3.307"/>
+            <Label x:Name="City" Grid.Row="0" Grid.Column="0" Content="City" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="37" Margin="0,106,0,0" Padding="2" RenderTransformOrigin="0.503,1.989"/>
+            <TextBox x:Name="streetTextbox" Text="{Binding Street}" TextWrapping="Wrap" Width="120" Margin="119,10,151,117" />
+            <TextBox x:Name="houseNumberTextbox" Text="{Binding HouseNumber}" TextWrapping="Wrap" Width="120" Margin="119,41,151,86" />
+            <TextBox x:Name="postalCodeTextbox" Text="{Binding PostalCode}" TextWrapping="Wrap" Width="120" Margin="119,73,151,54" />
+            <TextBox x:Name="cityTextbox" Text="{Binding City}" TextWrapping="Wrap" Width="120" Margin="119,106,151,21" />
+            <Button x:Name="addressButton" Content="Save" HorizontalAlignment="Left" Margin="282,0,0,0" VerticalAlignment="Center" Width="43"/>
+        </Grid>
+        <Grid Margin="395,201,-5,-8" x:Name="carGrid">
+            <Label x:Name="Brand" Grid.Row="0" Grid.Column="1" Content="Brand" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="84" Margin="10,5,0,0" Padding="2" RenderTransformOrigin="0.503,1.518"/>
+            <Label x:Name="Model" Grid.Row="0" Content="Model" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Width="84" Margin="10,39,0,0" Padding="2" RenderTransformOrigin="0.503,1.518"/>
+            <Label x:Name="Color" Grid.Row="0" Content="Color" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="84" Margin="10,77,0,0" Padding="2" RenderTransformOrigin="0.503,1.518"/>
+            <Label x:Name="Tires" Grid.Row="0" Content="Tires" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="84" Margin="10,109,0,0" Padding="2" RenderTransformOrigin="0.503,1.518"/>
+            <Label x:Name="Doors" Grid.Row="0" Content="Doors" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="84" Margin="10,142,0,0" Padding="2" RenderTransformOrigin="0.503,1.518"/>
+            <Label x:Name="MFD" Grid.Row="0" Content="MFD" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="84" Margin="10,183,0,0" Padding="2" RenderTransformOrigin="0.503,1.518"/>
+
+            <TextBox x:Name="brandTextBox" Height="20" Text="{Binding Brand}" TextWrapping="Wrap" Width="120" Margin="148,-6,122,193"/>
+            <TextBox x:Name="modelTextbox" Height="20" Text="{Binding Model}" TextWrapping="Wrap" Width="120" Margin="148,29,122,158"/>
+            <TextBox x:Name="colorTextBox" Height="20" Text="{Binding Color}" TextWrapping="Wrap" Width="120" Margin="148,66,122,121"/>
+            <TextBox x:Name="tiresTextBox" Height="20" Text="{Binding Tires}" TextWrapping="Wrap" Width="120" Margin="148,101,122,86"/>
+            <TextBox x:Name="doorsTextBox" Height="20" Text="{Binding Doors}" TextWrapping="Wrap" Width="120" Margin="148,136,122,51"/>
+            <TextBox x:Name="mfdTextBox" Height="20" Text="{Binding ManufactureDate}" TextWrapping="Wrap" Width="120" Margin="148,177,122,10"/>
+            <Button x:Name="carButton" Content="Save" RenderTransformOrigin="0.465,-0.252" Margin="281,119,36,109"/>
+        </Grid>
     </Grid>
 </Window>

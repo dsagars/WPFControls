@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,20 +22,21 @@ namespace Test
 {
     public partial class MainWindow : Window, INotifyCollectionChanged, INotifyPropertyChanged
     {
-        private ObservableCollection<Company> Companies;
+        private Company myCompany;
         private ObservableCollection<Car> CarsToAdd;
         private ObservableCollection<Address> AddressToAdd;
         private ObservableCollection<Company> ModifiedCompanyList;
         public MainWindow()
         {
             InitializeComponent();
-            Companies = new ObservableCollection<Company>();
+            myCompany = new Company();
 
             CarsToAdd = new ObservableCollection<Car>();
             AddressToAdd = new ObservableCollection<Address>();
             ModifiedCompanyList = new ObservableCollection<Company>();
-            DataContext = Companies;
-            Companies.CollectionChanged += this.OnCollectionChanged;
+            DataContext = ModifiedCompanyList;
+            listViewCompany.ItemsSource = ModifiedCompanyList;
+            ModifiedCompanyList.CollectionChanged += this.OnCollectionChanged;
             
         }
 
@@ -43,39 +44,45 @@ namespace Test
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-                CarsToAdd.Add(new Car
-                {
-                    Brand = txtBrand.Text,
-                    Model = txtModel.Text,
-                    Color = txtColor.Text,
-                    Doors = int.Parse(txtDoors.Text),
-                    Tires = int.Parse(txtTires.Text),
-                    ManufactureDate = DateTime.Parse(txtMFD.Text)
-                });
 
-                AddressToAdd.Add(new Address
-                {
-                    Street = txtStreet.Text,
-                    HouseNumber = int.Parse(txtHouseNumber.Text),
-                    PostalCode = int.Parse(txtPostalCode.Text),
-                    City = txtCity.Text
-                });
 
-                Companies.Add(new Company
-                {
+            CarsToAdd.Add(new Car
+            {
+                Brand = txtBrand.Text,
+                Model = txtModel.Text,
+                Color = txtColor.Text,
+                Doors = int.Parse(txtDoors.Text),
+                Tires = int.Parse(txtTires.Text),
+                ManufactureDate = DateTime.Parse(txtMFD.Text)
+            });
 
-                    CompanyName = txtCompanyName.Text,
-                    IsMainCompany = bool.Parse(txtIsMainCompany.Text),
-                    Cars = CarsToAdd,
-                    CompanyAddress = AddressToAdd
+            AddressToAdd.Add(new Address
+            {
+                Street = txtStreet.Text,
+                HouseNumber = int.Parse(txtHouseNumber.Text),
+                PostalCode = int.Parse(txtPostalCode.Text),
+                City = txtCity.Text
+            });
 
-                });
-             
-            
-            
-            
+            /*Companies.Add(new Company
+            {
+
+                CompanyName = txtCompanyName.Text,
+                IsMainCompany = bool.Parse(txtIsMainCompany.Text),
+                Cars = CarsToAdd,
+                CompanyAddress = AddressToAdd
+
+            });*/
+            myCompany = new Company()
+            {
+                CompanyName = txtCompanyName.Text,
+                IsMainCompany = bool.Parse(txtIsMainCompany.Text),
+                Cars = CarsToAdd,
+                CompanyAddress = AddressToAdd
+            };
+
+            ModifiedCompanyList.Add(myCompany);
+
 
             txtBrand.Text = txtModel.Text
           = txtColor.Text = txtDoors.Text
@@ -86,23 +93,31 @@ namespace Test
           = txtMFD.Text = string.Empty;
 
         }
-        
+
 
         private void BtnRemove_Click(object sender, RoutedEventArgs e)
         {
-            Companies.Remove(listCompany.SelectedItem as Company);
+            ModifiedCompanyList.Remove(listViewCompany.SelectedItem as Company);
         }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            EnterData enterData = new EnterData();
+            enterData.DataContext = ModifiedCompanyList;
+            enterData.Show();
+           
+        }
+
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public virtual void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
                 foreach (Company company in e.NewItems)
-                {
-                    ModifiedCompanyList.Add(company);
+                {   
                     company.PropertyChanged += this.OnItemPropertyChanged;
                 }
             }
@@ -110,13 +125,12 @@ namespace Test
             {
                 foreach (Company company in e.OldItems)
                 {
-                    ModifiedCompanyList.Add(company);
                     company.PropertyChanged -= this.OnItemPropertyChanged;
                 }
             }
         }
 
-        public void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public virtual void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Company company = sender as Company;
             if (company != null)
@@ -125,38 +139,19 @@ namespace Test
             }
         }
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            
-            foreach (var company in Companies)
-            {
-                if (SelectCompany.SelectedItem.ToString() == company.CompanyName)
-                {
-                    txtCompanyName.IsReadOnly = txtIsMainCompany.IsReadOnly = txtCompanyAddress.IsReadOnly = true;
-                    CarsToAdd.Add(new Car
-                    {
-                        Brand = txtBrand.Text,
-                        Model = txtModel.Text,
-                        Color = txtColor.Text,
-                        Doors = int.Parse(txtDoors.Text),
-                        Tires = int.Parse(txtTires.Text),
-                        ManufactureDate = DateTime.Parse(txtMFD.Text)
-                    });
-                }
-                 
-            }
-        }
-        
+
 
         private void SelectCompany_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Company company = new Company();
-            if (SelectCompany.SelectedIndex > -1 && Companies != null && SelectCompany.SelectedItem.ToString() == company.CompanyName)
+            foreach (Company company in ModifiedCompanyList)
             {
-                
+                SelectCompany.ItemsSource = company.CompanyName;
+                if (SelectCompany.SelectedItem.ToString() == company.CompanyName)
+                {
+                    btnEdit.DataContext = SelectCompany.SelectedItem;
+                }
             }
         }
-
         
-    }
+    }  
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,76 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.IO;
-using System.Data;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-
+using System.ComponentModel;
 
 namespace Test
 {
-
-    public partial class EnterData : Window, INotifyCollectionChanged
+    public partial class EnterData : Window
     {
-        XmlSerializer xs;
-        private ObservableCollection<Company> companyCollection = new ObservableCollection<Company>();
-        public ObservableCollection<Company> CompanyCollection
-        {
-            get
-            {
-                return companyCollection;
-            }
-            set
-            {
-                companyCollection = value;
-                
-            }
-        }
-        public Address CompanyAddress { get; set; }
-        List<Car> Cars = new List<Car>();
- 
+
         public EnterData()
         {
-
             InitializeComponent();
-            xs = new XmlSerializer(typeof(ObservableCollection<Company>));
-            CompanyCollection = new ObservableCollection<Company>();
+            MainWindow main = new MainWindow();
+            gridMain.DataContext = main;
             
-            dataGrid2.DataContext = CompanyCollection;
-            
-            
-
-
         }
-        
-        public void Save_Click(object sender, RoutedEventArgs e)
-        {
-
-            FileStream fs = new FileStream("C:\\CompanyDetails.xml", FileMode.Create, FileAccess.Write);
-            Company company = new Company();
-            company.CompanyName = textbox1.Text;
-            company.IsMainCompany = bool.Parse(textbox2.Text);
-          
-            CompanyCollection.Add(company);
-
-            xs.Serialize(fs, CompanyCollection);
-            fs.Close();
-
-        }
-       
-        private void Read_Click(object sender, RoutedEventArgs e)
-        {
-            FileStream fs = new FileStream("C:\\CompanyDetails.xml", FileMode.Open, FileAccess.Read);
-            CompanyCollection = (ObservableCollection<Company>)xs.Deserialize(fs);
-            dataGrid2.ItemsSource = CompanyCollection;
-            fs.Close();
-        }
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-       
-       
-
     }
 }
