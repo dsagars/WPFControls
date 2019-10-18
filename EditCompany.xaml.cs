@@ -20,14 +20,26 @@ namespace Test
     public partial class EditCompany : Window
     {
         Companies window;
+        public delegate Companies ValueChangedHandler(CompanyData data);
+        public event ValueChangedHandler ValueChanged; 
+
         public EditCompany(CompanyData company, Companies window)
         {
             InitializeComponent();
 
             this.window = window;
-            companyName.Text = company.name;
+            txtCompanyName.Text = company.CompanyName;
         }
 
+       
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+         if(ValueChanged != null)
+            {
+                ValueChanged(window); ;
+            }
+        }
         private void save()
         {
             window.save(new CompanyData("", true, null, null));

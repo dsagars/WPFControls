@@ -31,14 +31,20 @@ namespace Test
             cars.Add(new CompanyCar("VW"));
 
             company1 = new CompanyData("Hanseaticsoft GmbH", true, new CompanyAddress("Frankenstraße", 12), cars);
-
-            List<CompanyData> companyList = new List<CompanyData>();
+             List<CompanyData> companyList = new List<CompanyData>();
             companyList.Add(company1);
+            listViewCompany.Items.Add(companyList);
 
-            CompanyList.Items.Add(companyList);
+            EditCompany entry = new EditCompany(company1,this);
+            entry.ValueChanged += new EditCompany.ValueChangedHandler(entryValueChanged);
         }
 
-        private void Add_Company(object sender, RoutedEventArgs e)
+            private void entryValueChanged(CompanyData data)
+            {
+            
+            }
+
+        private void Edit_Company(object sender, RoutedEventArgs e)
         {
             EditCompany edit = new EditCompany(company1, this);
             edit.Show();
@@ -48,5 +54,8 @@ namespace Test
         {
             company1 = company;
         }
+
+     
+      
     }
 }

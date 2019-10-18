@@ -11,10 +11,10 @@
             <RowDefinition Height="319*" />
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
-        <ListView x:Name="CompanyList">
+        <ListView x:Name="listViewCompany">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}"></GridViewColumn>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding CompanyName}"></GridViewColumn>
                     <GridViewColumn Header="Is main company?" DisplayMemberBinding="{Binding isMainCompany}"></GridViewColumn>
                     <GridViewColumn Header="Address" DisplayMemberBinding="{Binding getDisplay}"></GridViewColumn>
                 </GridView>
@@ -26,8 +26,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Margin="25" Grid.Column="0" Content="Add"></Button>
-            <Button Margin="25" Grid.Column="1" Content="Edit" Click="Add_Company"></Button>
+            <Button Margin="25" Grid.Column="0" Content="Add" ></Button>
+            <Button Margin="25" Grid.Column="1" Content="Edit" Click="Edit_Company" ></Button>
             <Button Margin="25" Grid.Column="2" Content="Delete"></Button>
         </Grid>
     </Grid>
