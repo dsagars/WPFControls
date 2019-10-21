@@ -29,8 +29,7 @@ namespace Test
             }
 
         }
-       
-        
+      
         public virtual ObservableCollection<Car> Cars
         {
             get

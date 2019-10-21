@@ -11,7 +11,7 @@
             <RowDefinition Height="319*" />
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
-        <ListView x:Name="CompanyList">
+        <ListView x:Name="CompanyListView" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}"></GridViewColumn>
@@ -26,8 +26,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Margin="25" Grid.Column="0" Content="Add"></Button>
-            <Button Margin="25" Grid.Column="1" Content="Edit" Click="Add_Company"></Button>
+            <Button Margin="25" Grid.Column="0" Content="Add" Click="Add_Company"></Button>
+            <Button Margin="25" Grid.Column="1" Content="Edit" ></Button>
             <Button Margin="25" Grid.Column="2" Content="Delete"></Button>
         </Grid>
     </Grid>

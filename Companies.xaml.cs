@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +21,14 @@ namespace Test
     public partial class Companies : Window
     {
         CompanyData company1;
+        public ObservableCollection<CompanyData> mainWindowCompanyData;
+        //public List<CompanyData> companyList = new List<CompanyData>();
 
         public Companies()
         {
             InitializeComponent();
+            this.mainWindowCompanyData = new ObservableCollection<CompanyData>();
+            this.DataContext = mainWindowCompanyData;
 
             List<CompanyCar> cars = new List<CompanyCar>();
             cars.Add(new CompanyCar("Audi A1"));
@@ -31,17 +36,18 @@ namespace Test
             cars.Add(new CompanyCar("VW"));
 
             company1 = new CompanyData("Hanseaticsoft GmbH", true, new CompanyAddress("Frankenstraße", 12), cars);
+            mainWindowCompanyData.Add(company1);
+            //companyList.Add(company1);
 
-            List<CompanyData> companyList = new List<CompanyData>();
-            companyList.Add(company1);
-
-            CompanyList.Items.Add(companyList);
+            //CompanyListView.Items.Add(companyList);
+           // CompanyListView.ItemsSource = companyList;
+            CompanyListView.ItemsSource = mainWindowCompanyData;
         }
-
+     
         private void Add_Company(object sender, RoutedEventArgs e)
         {
-            EditCompany edit = new EditCompany(company1, this);
-            edit.Show();
+            var add = new AddWindow(mainWindowCompanyData);
+            add.Show();
         }
 
         public void save(CompanyData company)
