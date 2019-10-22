@@ -70,8 +70,7 @@ namespace Test
                 {
                     var edit = new EditCompany(data);
 
-                    edit.Show();
-                    
+                    edit.Show();    
                 }
                 
             }
@@ -79,6 +78,6 @@ namespace Test
 
         }
 
-       
+        
     }
 }

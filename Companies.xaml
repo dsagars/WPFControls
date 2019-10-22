@@ -11,7 +11,7 @@
             <RowDefinition Height="319*" />
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
-        <ListView x:Name="CompanyListView" ItemsSource="{Binding}" MouseDoubleClick="CompanyListView_MouseDoubleClick">
+        <ListView x:Name="CompanyListView" ItemsSource="{Binding}">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}"></GridViewColumn>
