@@ -40,6 +40,6 @@ namespace Test
             this.number = n;
         }
 
-        public string Display { get { return street + " " + number; } }
+        public string DisplayAddress { get { return street + " " + number; } }
     }
 }

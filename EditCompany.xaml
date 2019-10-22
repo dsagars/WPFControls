@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="EditCompany" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="companyName"></TextBox>
+        <TextBox x:Name="companyNameTxtBox" Text="{Binding name}"></TextBox>
+        <Button x:Name="saveButton" Content="Save" Click="Save_Click" Margin="65,372,656,16"/>
     </Grid>
 </Window>

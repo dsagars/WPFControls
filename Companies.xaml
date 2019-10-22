@@ -11,12 +11,21 @@
             <RowDefinition Height="319*" />
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
-        <ListView x:Name="CompanyListView" >
-            <ListView.View>
+        <ListView x:Name="CompanyListView" ItemsSource="{Binding}" MouseDoubleClick="CompanyListView_MouseDoubleClick">
+            <ListView.View >
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}"></GridViewColumn>
                     <GridViewColumn Header="Is main company?" DisplayMemberBinding="{Binding isMainCompany}"></GridViewColumn>
-                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding getDisplay}"></GridViewColumn>
+                    <!--<GridViewColumn Header="Address" DisplayMemberBinding="{Binding getDisplay}"></GridViewColumn>-->
+                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding address}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
                 </GridView>
             </ListView.View>
         </ListView>
@@ -27,8 +36,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button Margin="25" Grid.Column="0" Content="Add" Click="Add_Company"></Button>
-            <Button Margin="25" Grid.Column="1" Content="Edit" ></Button>
-            <Button Margin="25" Grid.Column="2" Content="Delete"></Button>
+            <Button Margin="25" Grid.Column="1" IsEnabled="{Binding ElementName=CompanyListView,Path=SelectedItems.Count}"  Content="Edit" Click="Edit_Click" ></Button>
+            <Button Margin="25" Grid.Column="2" Content="Delete" Click="Delete_Click"></Button>
         </Grid>
     </Grid>
 </Window>

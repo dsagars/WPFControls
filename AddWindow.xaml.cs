@@ -22,25 +22,37 @@ namespace Test
         private ObservableCollection<Companies> companies;
         CompanyData currentItem;
 
-        private CompanyData data { get; set; }
+        
         public AddWindow()
         {
             InitializeComponent();
-
+            
         }
         public AddWindow(ObservableCollection<CompanyData> _companyData)
         {
             this.companyData = _companyData;
             InitializeComponent();
-            this.DataContext = this.companyData;
+            this.DataContext = companyData;
              
             
         }
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-           CompanyData data = new CompanyData(saveNowTextBox.Text, true, null, null);
-            //saveNow.DataContext = data;
+            
+            CompanyAddress newAdd = new CompanyAddress(txtStreet.Text, int.Parse(txtnumber.Text));
+            
+            CompanyData data = new CompanyData(saveNowTextBox.Text,false, newAdd , null);
+            
+            if(isMainCompanyCheckBox.IsChecked == true)
+            {
+                data.isMainCompany = true;
+            }
+            else
+            {
+                data.isMainCompany = false;
+            }
             companyData.Add(data);
+            
 
             
             

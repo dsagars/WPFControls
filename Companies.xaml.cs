@@ -22,37 +22,63 @@ namespace Test
     {
         CompanyData company1;
         public ObservableCollection<CompanyData> mainWindowCompanyData;
+        public CompanyAddress Address { get; set; }
         //public List<CompanyData> companyList = new List<CompanyData>();
-
+        public CompanyAddress address;
         public Companies()
         {
             InitializeComponent();
             this.mainWindowCompanyData = new ObservableCollection<CompanyData>();
-            this.DataContext = mainWindowCompanyData;
+            
 
             List<CompanyCar> cars = new List<CompanyCar>();
             cars.Add(new CompanyCar("Audi A1"));
             cars.Add(new CompanyCar("BMW1"));
             cars.Add(new CompanyCar("VW"));
 
+           
             company1 = new CompanyData("Hanseaticsoft GmbH", true, new CompanyAddress("Frankenstraße", 12), cars);
             mainWindowCompanyData.Add(company1);
-            //companyList.Add(company1);
 
-            //CompanyListView.Items.Add(companyList);
-           // CompanyListView.ItemsSource = companyList;
-            CompanyListView.ItemsSource = mainWindowCompanyData;
+            //CompanyListView.ItemsSource = mainWindowCompanyData;
+
+            this.DataContext = mainWindowCompanyData;
         }
      
         private void Add_Company(object sender, RoutedEventArgs e)
         {
+
             var add = new AddWindow(mainWindowCompanyData);
             add.Show();
         }
 
-        public void save(CompanyData company)
+        public void Save(CompanyData company)
         {
             company1 = company;
         }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowCompanyData.Remove(CompanyListView.SelectedItem as CompanyData);
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {         
+            foreach(CompanyData data in mainWindowCompanyData)
+            {
+                if(CompanyListView.SelectedItem == data)
+                {
+                    var edit = new EditCompany(data);
+
+                    edit.Show();
+                    
+                }
+                
+            }
+             
+
+        }
+
+       
     }
 }

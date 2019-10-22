@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.Collections.ObjectModel;
 namespace Test
 {
     /// <summary>
@@ -19,18 +19,22 @@ namespace Test
     /// </summary>
     public partial class EditCompany : Window
     {
-        Companies window;
-        public EditCompany(CompanyData company, Companies window)
+        //Companies window;
+        CompanyData companyToBeEdited;
+        Companies companyBase;
+        private ObservableCollection<CompanyData> editWindowCompanyData;
+        public EditCompany(CompanyData company)
         {
             InitializeComponent();
-
-            this.window = window;
-            companyName.Text = company.name;
+            companyToBeEdited = company;
+            this.DataContext = companyToBeEdited;
         }
 
-        private void save()
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-            window.save(new CompanyData("", true, null, null));
+            CompanyData data = new CompanyData(companyNameTxtBox.Text, false,null, null);
+            
         }
+
     }
 }
