@@ -19,8 +19,7 @@ namespace Test
     public partial class AddWindow : Window
     {
         private ObservableCollection<CompanyData> companyData;
-        private ObservableCollection<Companies> companies;
-        CompanyData currentItem;
+        
 
         
         public AddWindow()
@@ -31,32 +30,29 @@ namespace Test
         public AddWindow(ObservableCollection<CompanyData> _companyData)
         {
             this.companyData = _companyData;
-            InitializeComponent();
-            this.DataContext = companyData;
-             
-            
+            InitializeComponent();                
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             
             CompanyAddress newAdd = new CompanyAddress(txtStreet.Text, int.Parse(txtnumber.Text));
             
-            CompanyData data = new CompanyData(saveNowTextBox.Text,false, newAdd , null);
+            CompanyData data = new CompanyData(int.Parse(idTextBox.Text),saveNowTextBox.Text,false, newAdd , null);
             
             if(isMainCompanyCheckBox.IsChecked == true)
             {
-                data.isMainCompany = true;
+                data.IsMainCompany = true;
             }
             else
             {
-                data.isMainCompany = false;
+                data.IsMainCompany = false;
             }
-            companyData.Add(data);
-            
+            companyData.Add(data);            
+        }
 
-            
-            
-            
+        private void SaveEditButton_Click(object sender, RoutedEventArgs e)
+        {
+          
         }
     }
 }

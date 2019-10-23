@@ -6,8 +6,13 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="EditCompany" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="companyNameTxtBox" Text="{Binding name}"></TextBox>
-        <Button x:Name="saveButton" Content="Save" Click="Save_Click" Margin="65,372,656,16"/>
+    <Grid >
+        <Label Content="Id" Height="35" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="idTxtBox" Text="{Binding Id}" Margin="8,42,680,347"></TextBox>
+        <Label Content="Company" Height="35" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="152,2,0,0"/>
+        <TextBox x:Name="companyNameTxtBox" Text="{Binding CompanyName}" Margin="147,42,541,347"></TextBox>
+         <Label Content="Is Main Company" Margin="304,5,366,383"  />
+        <CheckBox x:Name="isMainCompanyCheckBox" Content="{Binding IsMainCompany}" Margin="337,51,406,350"/>
+        <Button x:Name="saveButton" Content="Save" Click="Save_Click" Margin="65,372,656,16" />
     </Grid>
 </Window>

@@ -32,8 +32,7 @@ namespace Test
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            CompanyData data = new CompanyData(companyNameTxtBox.Text, false,null, null);
-            
+            CompanyData data = new CompanyData(1,companyNameTxtBox.Text, false,null, null);
         }
 
     }

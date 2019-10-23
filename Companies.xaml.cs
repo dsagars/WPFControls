@@ -23,12 +23,12 @@ namespace Test
         CompanyData company1;
         public ObservableCollection<CompanyData> mainWindowCompanyData;
         public CompanyAddress Address { get; set; }
-        //public List<CompanyData> companyList = new List<CompanyData>();
-        public CompanyAddress address;
+        
+        
         public Companies()
         {
             InitializeComponent();
-            this.mainWindowCompanyData = new ObservableCollection<CompanyData>();
+            mainWindowCompanyData = new ObservableCollection<CompanyData>();
             
 
             List<CompanyCar> cars = new List<CompanyCar>();
@@ -37,7 +37,7 @@ namespace Test
             cars.Add(new CompanyCar("VW"));
 
            
-            company1 = new CompanyData("Hanseaticsoft GmbH", true, new CompanyAddress("Frankenstraße", 12), cars);
+            company1 = new CompanyData(1,"Hanseaticsoft GmbH", true, new CompanyAddress("Frankenstraße", 12), cars);
             mainWindowCompanyData.Add(company1);
 
             //CompanyListView.ItemsSource = mainWindowCompanyData;
@@ -71,13 +71,21 @@ namespace Test
                     var edit = new EditCompany(data);
 
                     edit.Show();    
-                }
-                
+                }               
             }
-             
-
+           
         }
-
-        
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+           
+            foreach(CompanyData data in mainWindowCompanyData)
+            {
+                if (CompanyListView.SelectedItem == data)
+                {
+                    var add = new AddorEdit(mainWindowCompanyData, data, CompanyListView);
+                    add.Show();
+                }
+            }
+        }
     }
 }

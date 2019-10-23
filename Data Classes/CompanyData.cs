@@ -4,42 +4,44 @@ namespace Test
 {
     public class CompanyData
     {
-        public string name { get; set; }
+        public int Id { get; set; }
+        public string CompanyName { get; set; }
 
-        public bool isMainCompany { get; set; }
-        public CompanyAddress address { get; set; }
-        public List<CompanyCar> cars { get; set; }
-        public CompanyData(string name, bool isMainCompany, CompanyAddress address, List<CompanyCar> cars)
+        public bool IsMainCompany { get; set; }
+        public CompanyAddress Address { get; set; }
+        public List<CompanyCar> Cars { get; set; }
+        public CompanyData(int id,string name, bool isMainCompany, CompanyAddress address, List<CompanyCar> cars)
         {
-            this.name = name;
-            this.isMainCompany = isMainCompany;
-            this.address = address;
-            this.cars = cars;
+            this.CompanyName = name;
+            this.IsMainCompany = isMainCompany;
+            this.Address = address;
+            this.Cars = cars;
+            this.Id = id;
         }
     }
 
     public class CompanyCar
     {
-        public string name { get; set; }
+        public string Brand { get; set; }
 
-        public CompanyCar(string name)
+        public CompanyCar(string brand)
         {
-            this.name = name;
+            this.Brand = brand;
         }
     }
 
     public class CompanyAddress
     {
-        public string street { get; set; }
+        public string Street { get; set; }
 
-        public int number { get; set; }
+        public int Number { get; set; }
 
         public CompanyAddress(string s, int n)
         {
-            this.street = s;
-            this.number = n;
+            this.Street = s;
+            this.Number = n;
         }
 
-        public string DisplayAddress { get { return street + " " + number; } }
+        public string DisplayAddress { get { return Street + " " + Number; } }
     }
 }
