@@ -1,47 +1,75 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Test
 {
-    public class CompanyData
+    public class CompanyData : INotifyPropertyChanged
     {
-        public int Id { get; set; }
-        public string CompanyName { get; set; }
+        private string companyName;
+        private bool isMainCompany;
+        public string CompanyName
+        {
+            get { return companyName; }
+            set { SetField(ref companyName, value, "CompanyName");}
+        }
 
-        public bool IsMainCompany { get; set; }
-        public CompanyAddress Address { get; set; }
-        public List<CompanyCar> Cars { get; set; }
-        public CompanyData(int id,string name, bool isMainCompany, CompanyAddress address, List<CompanyCar> cars)
+        public bool IsMainCompany
+        {
+            get { return isMainCompany; }
+            set { SetField(ref isMainCompany, value, "IsMainCompany"); }
+        }
+        public CompanyAddress address { get; set; }
+        public List<CompanyCar> cars { get; set; }
+        public CompanyData(string name, bool isMainCompany, CompanyAddress address, List<CompanyCar> cars)
         {
             this.CompanyName = name;
             this.IsMainCompany = isMainCompany;
-            this.Address = address;
-            this.Cars = cars;
-            this.Id = id;
+            this.address = address;
+            this.cars = cars;
+           
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected bool SetField<CompanyData>(ref CompanyData field, CompanyData value, string propertyName)
+        {
+            if (EqualityComparer<CompanyData>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
     }
+
+
 
     public class CompanyCar
     {
-        public string Brand { get; set; }
+        public string name { get; set; }
 
-        public CompanyCar(string brand)
+        public CompanyCar(string name)
         {
-            this.Brand = brand;
+            this.name = name;
         }
     }
 
     public class CompanyAddress
     {
-        public string Street { get; set; }
+        public string street { get; set; }
 
-        public int Number { get; set; }
+        public int number { get; set; }
 
         public CompanyAddress(string s, int n)
         {
-            this.Street = s;
-            this.Number = n;
+            this.street = s;
+            this.number = n;
         }
 
-        public string DisplayAddress { get { return Street + " " + Number; } }
+        public string Display { get { return street + " " + number; } }
     }
 }

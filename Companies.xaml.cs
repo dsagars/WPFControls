@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,71 +20,42 @@ namespace Test
     public partial class Companies : Window
     {
         CompanyData company1;
-        public ObservableCollection<CompanyData> mainWindowCompanyData;
-        public CompanyAddress Address { get; set; }
-        
-        
+
         public Companies()
         {
             InitializeComponent();
-            mainWindowCompanyData = new ObservableCollection<CompanyData>();
-            
 
             List<CompanyCar> cars = new List<CompanyCar>();
             cars.Add(new CompanyCar("Audi A1"));
             cars.Add(new CompanyCar("BMW1"));
             cars.Add(new CompanyCar("VW"));
 
-           
-            company1 = new CompanyData(1,"Hanseaticsoft GmbH", true, new CompanyAddress("Frankenstraße", 12), cars);
-            mainWindowCompanyData.Add(company1);
+            company1 = new CompanyData("Hanseaticsoft GmbH", true, new CompanyAddress("Frankenstraße", 12), cars);
+             List<CompanyData> companyList = new List<CompanyData>();
+            companyList.Add(company1);
+            listViewCompany.Items.Add(companyList);
 
-            //CompanyListView.ItemsSource = mainWindowCompanyData;
-
-            this.DataContext = mainWindowCompanyData;
+            EditCompany entry = new EditCompany(company1,this);
+            entry.ValueChanged += new EditCompany.ValueChangedHandler(entryValueChanged);
         }
-     
-        private void Add_Company(object sender, RoutedEventArgs e)
+
+            private void entryValueChanged(CompanyData data)
+            {
+            
+            }
+
+        private void Edit_Company(object sender, RoutedEventArgs e)
         {
-
-            var add = new AddWindow(mainWindowCompanyData);
-            add.Show();
+            EditCompany edit = new EditCompany(company1, this);
+            edit.Show();
         }
 
-        public void Save(CompanyData company)
+        public void save(CompanyData company)
         {
             company1 = company;
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            mainWindowCompanyData.Remove(CompanyListView.SelectedItem as CompanyData);
-        }
-
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {         
-            foreach(CompanyData data in mainWindowCompanyData)
-            {
-                if(CompanyListView.SelectedItem == data)
-                {
-                    var edit = new EditCompany(data);
-
-                    edit.Show();    
-                }               
-            }
-           
-        }
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-           
-            foreach(CompanyData data in mainWindowCompanyData)
-            {
-                if (CompanyListView.SelectedItem == data)
-                {
-                    var add = new AddorEdit(mainWindowCompanyData, data, CompanyListView);
-                    add.Show();
-                }
-            }
-        }
+     
+      
     }
 }
