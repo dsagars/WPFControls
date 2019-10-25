@@ -33,14 +33,14 @@ namespace Test
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            CompanyData data = new CompanyData(int.Parse(iDAddOrEditTxtBox.Text), companyNameAddOrEditTxtBox.Text, true, null, null);
-            if (data.Id == (addOrEditListView.SelectedIndex + 1))
-            {
+            
+                CompanyData data = newCompany;
+                
                 data.CompanyName = companyNameAddOrEditTxtBox.Text;
                 data.Id = int.Parse(iDAddOrEditTxtBox.Text);
                 data.Address = null;
                 data.Cars = null;
-            }
+            
             
         }
 
